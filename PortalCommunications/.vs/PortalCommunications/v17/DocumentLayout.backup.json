@@ -1,12 +1,37 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\Project\\PortalCommunications\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\MVCPractice\\Portal-Tier-Project-V\\PortalCommunications\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\thoma\\documents\\bcs\\cscn73030 - project v\\mvcpractice\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\components\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Login.razor",
+              "DocumentMoniker": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\MVCPractice\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\Login.razor",
+              "RelativeDocumentMoniker": "PortalCommunications\\Components\\Pages\\Login.razor",
+              "ToolTip": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\MVCPractice\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\Login.razor",
+              "RelativeToolTip": "PortalCommunications\\Components\\Pages\\Login.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-09T01:29:14.614Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
