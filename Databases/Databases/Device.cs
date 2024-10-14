@@ -15,70 +15,72 @@ namespace Databases
         public ICollection<DeviceLog> DeviceLogs { get; set; } // Logging data for the device
         public DateTime LastUpdated { get; set; } // Last time the status was updated
 
-        public class Thermostat : Device
+    }
+
+    public class SmartVacuum : Device
+    {
+        public double batteryLife { get; set; } // Battery life percentage
+        public string location { get; set; } // Current location of vacuum in the house
+        public string notification { get; set; } // Status (e.g., "Clogged", "Change Filter")
+
+        // Command functions
+        public void TurnOn()
         {
-            public double currentTemp { get; set; }
-            public double targetTemp { get; set; }
-
-            public void SetTemp(double temp)
-            {
-                targetTemp = temp;
-                State = "Heating/Cooling";
-            }
-
-            public void ToggleSystem(string mode)
-            {
-                State = mode;
-            }
+            State = "On";
         }
 
-        public class SmartFridge : Device
+        public void TurnOff()
         {
-            public double fridgeTemp { get; set; }
-            public double freezerTemp { get; set; }
-
-            public double humidityLevel { get; set; }
-
-            public void SetFridgeTemp(double temp)
-            {
-                fridgeTemp = temp;
-                State = "Fridge Temperature Set";
-            }
-
-            public void SetFreezerTemp(double temp)
-            {
-                freezerTemp = temp;
-                State = "Freezer Temperature Set";
-            }
-
-            public class SmartVacuum : Device
-            {
-                public double batteryLife { get; set; }
-                public string location { get; set; }
-
-                public string notification { get; set; }
-
-                public void TurnOn()
-                {
-                    State = "On";
-                }
-
-                public void TurnOff()
-                {
-                    State = "Off";
-                }
-
-                public void ErrorNotification (string message)
-                {
-                    notification = message;
-                }
-            }
+            State = "Off";
         }
 
-        public class Dehumidifier : Device
+        public void IssueNotification(string message)
         {
-            public double humidityLevel { get; set; }
-            public double waterLevel { get; set; }
+            notification = message;
+        }
+    }
+    public class Thermostat : Device
+    {
+        public double currentTemp { get; set; }
+        public double targetTemp { get; set; }
+
+        public void SetTemp(double temp)
+        {
+            targetTemp = temp;
+            State = "Heating/Cooling";
+        }
+
+        public void ToggleSystem(string mode)
+        {
+            State = mode;
+        }
+    }
+
+    public class SmartFridge : Device
+    {
+        public double fridgeTemp { get; set; }
+        public double freezerTemp { get; set; }
+
+        public double humidityLevel { get; set; }
+
+        public void SetFridgeTemp(double temp)
+        {
+            fridgeTemp = temp;
+            State = "Fridge Temperature Set";
+        }
+
+        public void SetFreezerTemp(double temp)
+        {
+            freezerTemp = temp;
+            State = "Freezer Temperature Set";
+        }
+
+        public class SmartVacuum : Device
+        {
+            public double batteryLife { get; set; }
+            public string location { get; set; }
+
+            public string notification { get; set; }
 
             public void TurnOn()
             {
@@ -90,46 +92,65 @@ namespace Databases
                 State = "Off";
             }
 
-            public void TankEmpty()
+            public void ErrorNotification(string message)
             {
-               if (waterLevel <= 0 )
-                {
-                    State = "The water tank empty";
-                }
+                notification = message;
             }
-
-
-
         }
+    }
 
-        public class SmartOven : Device
+    public class Dehumidifier : Device
+    {
+        public double humidityLevel { get; set; }
+        public double waterLevel { get; set; }
+
+        public void TurnOn()
         {
-            public double currentTemp { get; set; }
-            public double targetTemp { get; set; }
+            State = "On";
+        }
 
-            public void SetTemp(double temp)
+        public void TurnOff()
+        {
+            State = "Off";
+        }
+
+        public void TankEmpty()
+        {
+            if (waterLevel <= 0)
             {
-                targetTemp = temp;
-
-                State = "Temperature has been set";
-            }
-
-            public void TurnOn()
-            {
-                State = "On";
-            }
-
-            public void TurnOff()
-            {
-                State = "Off";
-            }
-
-            public void SendNotification (string message)
-            {
-                State = message;
+                State = "The water tank empty";
             }
         }
 
 
+
+    }
+
+    public class SmartOven : Device
+    {
+        public double currentTemp { get; set; }
+        public double targetTemp { get; set; }
+
+        public void SetTemp(double temp)
+        {
+            targetTemp = temp;
+
+            State = "Temperature has been set";
+        }
+
+        public void TurnOn()
+        {
+            State = "On";
+        }
+
+        public void TurnOff()
+        {
+            State = "Off";
+        }
+
+        public void SendNotification(string message)
+        {
+            State = message;
+        }
     }
 }
