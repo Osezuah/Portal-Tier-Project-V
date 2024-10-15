@@ -1,0 +1,200 @@
+﻿@page "/All-Devices"
+
+<PageTitle>All Devices</PageTitle>
+
+<div class="main-content">
+    <div class="header">
+        <div class="logo-container">
+            <img src="images/portal logo.png" alt="Portal Logo" class="portal-logo">
+        </div>
+    </div>
+
+    <h1>All Devices</h1>
+
+    <p>Here you can manage all your smart devices.</p>
+
+    <!-- Device Management Section -->
+    <div class="device-list">
+        <!-- Smart Fridge -->
+        <div class="device-item">
+            <span class="device-name">Smart Fridge</span>
+            <span class="device-location">Kitchen</span>
+            <label class="switch">
+                <input type="checkbox" checked />
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <!-- Smart Toaster -->
+        <div class="device-item">
+            <span class="device-name">Smart Toaster</span>
+            <span class="device-location">Kitchen</span>
+            <label class="switch">
+                <input type="checkbox" />
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <!-- Smart Security System with Dropdown -->
+        <div class="device-item">
+            <span class="device-name">Smart Security System</span>
+            <span class="device-location">Security</span>
+            <img src="images/dropdown icon.jpg" alt="Dropdown Icon" class="dropdown-icon" @onclick="ToggleDropdown" style="cursor: pointer;" />
+        </div>
+
+        <!-- Sub-device (Dropdown content) -->
+        <div class="dropdown-content @(isDropdownOpen ? "show" : "")">
+            <div class="sub-device">
+                <span class="sub-device-name">Security Camera</span>
+                <label class="switch">
+                    <input type="checkbox" checked />
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Smart Coffee Maker -->
+        <div class="device-item">
+            <span class="device-name">Smart Coffee Maker</span>
+            <span class="device-location">Kitchen</span>
+            <label class="switch">
+                <input type="checkbox" />
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool isDropdownOpen = false;
+
+    private void ToggleDropdown()
+    {
+        isDropdownOpen = !isDropdownOpen;
+    }
+}
+
+<!--CSS Code-->
+<style>
+    .main-content {
+        text-align: center;
+    }
+
+    .header {
+        margin-bottom: 20px;
+    }
+
+    .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .portal-logo {
+        width: 150px;
+        height: auto;
+    }
+
+    .device-list {
+        margin-top: 20px;
+    }
+
+    .device-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background-color: #f5f5f5;
+    }
+
+    .device-name {
+        font-size: 18px;
+        width: 200px;
+    }
+
+    .device-location {
+        width: 100px;
+        color: gray;
+        text-align: left;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+    input:checked + .slider {
+        background-color: #4caf50;
+    }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+    /* Dropdown content styling */
+    .dropdown-content {
+        display: none;
+        margin-left: 20px; /* Indent the dropdown to the right */
+    }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+    /* Sub-device styling */
+    .sub-device {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        border-bottom: 1px solid #ddd;
+        background-color: #eef7ff; /* Different background color for sub-devices */
+        margin-bottom: 10px;
+        margin-left: 40px; /* Further indent the sub-device to show hierarchy */
+    }
+
+    .sub-device-name {
+        font-size: 15px;
+        width: 200px;
+    }
+
+    .dropdown-icon {
+        width: 20px;
+        cursor: pointer;
+    }
+</style>
