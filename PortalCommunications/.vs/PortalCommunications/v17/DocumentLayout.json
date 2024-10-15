@@ -1,5 +1,9 @@
 {
   "Version": 1,
+<<<<<<< HEAD
+  "WorkspaceRootPath": "D:\\Program Projects\\Portal-Tier-Project-V\\PortalCommunications\\",
+  "Documents": [],
+=======
   "WorkspaceRootPath": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\MVCPractice\\Portal-Tier-Project-V\\PortalCommunications\\",
   "Documents": [
     {
@@ -19,6 +23,7 @@
       "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\components\\layout\\navmenu.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
+>>>>>>> Portal-Communications
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -26,6 +31,13 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+=======
           "SelectedChildIndex": 3,
           "Children": [
             {
@@ -79,6 +91,7 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-10-09T01:29:14.614Z",
               "EditorCaption": ""
+>>>>>>> Portal-Communications
             }
           ]
         }
