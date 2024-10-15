@@ -1,29 +1,28 @@
 {
   "Version": 1,
-<<<<<<< HEAD
-  "WorkspaceRootPath": "D:\\Program Projects\\Portal-Tier-Project-V\\PortalCommunications\\",
-  "Documents": [],
-=======
-  "WorkspaceRootPath": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\MVCPractice\\Portal-Tier-Project-V\\PortalCommunications\\",
+  "WorkspaceRootPath": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\thoma\\documents\\bcs\\cscn73030 - project v\\mvcpractice\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\components\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\ehinomhen\\source\\repos\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\pages\\useraccount.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\components\\pages\\useraccount.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\thoma\\documents\\bcs\\cscn73030 - project v\\mvcpractice\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\pages\\logout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\ehinomhen\\source\\repos\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\pages\\logout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\components\\pages\\logout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\thoma\\documents\\bcs\\cscn73030 - project v\\mvcpractice\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\ehinomhen\\source\\repos\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\components\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\thoma\\documents\\bcs\\cscn73030 - project v\\mvcpractice\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\layout\\navmenu.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\ehinomhen\\source\\repos\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\layout\\navmenu.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\components\\layout\\navmenu.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\ehinomhen\\source\\repos\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
->>>>>>> Portal-Communications
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -31,67 +30,112 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-<<<<<<< HEAD
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-=======
-          "SelectedChildIndex": 3,
-          "Children": [
+            },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "NavMenu.razor.css",
-              "DocumentMoniker": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\MVCPractice\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Layout\\NavMenu.razor.css",
-              "RelativeDocumentMoniker": "PortalCommunications\\Components\\Layout\\NavMenu.razor.css",
-              "ToolTip": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\MVCPractice\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Layout\\NavMenu.razor.css",
-              "RelativeToolTip": "PortalCommunications\\Components\\Layout\\NavMenu.razor.css",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAADEAAAB8AgAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-10-13T14:27:42.069Z",
+              "DocumentIndex": 0,
+              "Title": "UserAccount.razor",
+              "DocumentMoniker": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\UserAccount.razor",
+              "RelativeDocumentMoniker": "PortalCommunications\\Components\\Pages\\UserAccount.razor",
+              "ToolTip": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\UserAccount.razor",
+              "RelativeToolTip": "PortalCommunications\\Components\\Pages\\UserAccount.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-15T03:59:48.824Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
+              "Title": "NavMenu.razor.css",
+              "DocumentMoniker": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Layout\\NavMenu.razor.css",
+              "RelativeDocumentMoniker": "PortalCommunications\\Components\\Layout\\NavMenu.razor.css",
+              "ToolTip": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Layout\\NavMenu.razor.css",
+              "RelativeToolTip": "PortalCommunications\\Components\\Layout\\NavMenu.razor.css",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-10-15T03:56:58.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "NavMenu.razor",
-              "DocumentMoniker": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\MVCPractice\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Layout\\NavMenu.razor",
+              "DocumentMoniker": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Layout\\NavMenu.razor",
               "RelativeDocumentMoniker": "PortalCommunications\\Components\\Layout\\NavMenu.razor",
-              "ToolTip": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\MVCPractice\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Layout\\NavMenu.razor",
+              "ToolTip": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Layout\\NavMenu.razor",
               "RelativeToolTip": "PortalCommunications\\Components\\Layout\\NavMenu.razor",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAKAAAAAAAAAA==",
+              "ViewState": "AQIAABIAAAAAAAAAAADwvyEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-13T14:17:10.103Z",
+              "WhenOpened": "2024-10-15T03:56:58.721Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Logout.razor",
-              "DocumentMoniker": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\MVCPractice\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\Logout.razor",
+              "DocumentMoniker": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\Logout.razor",
               "RelativeDocumentMoniker": "PortalCommunications\\Components\\Pages\\Logout.razor",
-              "ToolTip": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\MVCPractice\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\Logout.razor",
+              "ToolTip": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\Logout.razor",
               "RelativeToolTip": "PortalCommunications\\Components\\Pages\\Logout.razor",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAaAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-13T14:02:15.758Z",
+              "WhenOpened": "2024-10-15T03:56:58.728Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Login.razor",
-              "DocumentMoniker": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\MVCPractice\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\Login.razor",
+              "DocumentMoniker": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\Login.razor",
               "RelativeDocumentMoniker": "PortalCommunications\\Components\\Pages\\Login.razor",
-              "ToolTip": "C:\\Users\\Thoma\\Documents\\BCS\\CSCN73030 - Project V\\MVCPractice\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\Login.razor",
+              "ToolTip": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\Login.razor",
               "RelativeToolTip": "PortalCommunications\\Components\\Pages\\Login.razor",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAgwBsAAABTAAAAAAAAAA==",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-09T01:29:14.614Z",
+              "WhenOpened": "2024-10-15T03:56:58.733Z",
               "EditorCaption": ""
->>>>>>> Portal-Communications
             }
           ]
         }
