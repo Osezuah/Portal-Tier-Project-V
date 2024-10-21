@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\ehinomhen\\source\\repos\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\pages\\useraccount.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\components\\pages\\useraccount.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\ehinomhen\\source\\repos\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\pages\\useraccount.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\components\\pages\\useraccount.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\ehinomhen\\source\\repos\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\pages\\useraccount.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\components\\pages\\useraccount.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\ehinomhen\\source\\repos\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\layout\\navmenu.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -84,33 +84,33 @@
               "RelativeDocumentMoniker": "PortalCommunications\\Components\\Layout\\NavMenu.razor.css",
               "ToolTip": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Layout\\NavMenu.razor.css",
               "RelativeToolTip": "PortalCommunications\\Components\\Layout\\NavMenu.razor.css",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2024-10-15T15:13:06.46Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "UserAccount.razor.css",
               "DocumentMoniker": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\UserAccount.razor.css",
               "RelativeDocumentMoniker": "PortalCommunications\\Components\\Pages\\UserAccount.razor.css",
               "ToolTip": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\UserAccount.razor.css",
               "RelativeToolTip": "PortalCommunications\\Components\\Pages\\UserAccount.razor.css",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAQAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2024-10-15T15:12:52.868Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UserAccount.razor",
               "DocumentMoniker": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\UserAccount.razor",
               "RelativeDocumentMoniker": "PortalCommunications\\Components\\Pages\\UserAccount.razor",
               "ToolTip": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\UserAccount.razor",
               "RelativeToolTip": "PortalCommunications\\Components\\Pages\\UserAccount.razor",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABIAAAAoAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-10-15T14:43:14.269Z",
               "EditorCaption": ""
@@ -125,8 +125,7 @@
               "RelativeToolTip": "PortalCommunications\\Components\\Layout\\NavMenu.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-15T03:56:58.721Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-15T03:56:58.721Z"
             },
             {
               "$type": "Document",
@@ -138,8 +137,7 @@
               "RelativeToolTip": "PortalCommunications\\Components\\Pages\\Logout.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAABLAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-15T03:56:58.728Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-15T03:56:58.728Z"
             },
             {
               "$type": "Document",
@@ -151,8 +149,7 @@
               "RelativeToolTip": "PortalCommunications\\Components\\Pages\\Login.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-15T03:56:58.733Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-15T03:56:58.733Z"
             }
           ]
         }

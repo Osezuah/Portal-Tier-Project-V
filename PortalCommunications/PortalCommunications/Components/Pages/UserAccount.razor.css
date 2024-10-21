@@ -1,4 +1,17 @@
 ﻿.headerStyling {
     display: inline;
+    padding: 0px 0px 0px 20px;
 }
 
+.dataBorder{
+    border: 5px solid black;
+    margin: 5px 0px 30px 80px;
+    padding: 8px 0px 8px 8px;
+    border-radius: 25px 25px;
+    max-width: 680px;
+}
+
+.des{
+    font-size: 20px;
+    font-style: italic;
+}
