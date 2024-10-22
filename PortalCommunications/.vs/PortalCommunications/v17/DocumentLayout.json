@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\ehinomhen\\source\\repos\\portal-tier-project-v\\portalcommunications\\portalcommunications\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|c:\\users\\ehinomhen\\source\\repos\\portal-tier-project-v\\portalcommunications\\portalcommunications\\components\\pages\\useraccount.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C485E639-3F6C-43AD-8CDA-0727B4B986F3}|PortalCommunications\\PortalCommunications.csproj|solutionrelative:portalcommunications\\components\\pages\\useraccount.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -30,8 +34,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Program.cs",
+              "RelativeDocumentMoniker": "PortalCommunications\\Program.cs",
+              "ToolTip": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Program.cs",
+              "RelativeToolTip": "PortalCommunications\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T18:57:10.242Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
@@ -74,7 +91,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "UserAccount.razor.css",
               "DocumentMoniker": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\UserAccount.razor.css",
               "RelativeDocumentMoniker": "PortalCommunications\\Components\\Pages\\UserAccount.razor.css",
@@ -87,20 +104,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UserAccount.razor",
               "DocumentMoniker": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\UserAccount.razor",
               "RelativeDocumentMoniker": "PortalCommunications\\Components\\Pages\\UserAccount.razor",
               "ToolTip": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\UserAccount.razor",
               "RelativeToolTip": "PortalCommunications\\Components\\Pages\\UserAccount.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAASAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-10-15T14:43:14.269Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "NavMenu.razor",
               "DocumentMoniker": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Layout\\NavMenu.razor",
               "RelativeDocumentMoniker": "PortalCommunications\\Components\\Layout\\NavMenu.razor",
@@ -113,7 +130,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Logout.razor",
               "DocumentMoniker": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\Logout.razor",
               "RelativeDocumentMoniker": "PortalCommunications\\Components\\Pages\\Logout.razor",
@@ -125,7 +142,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Login.razor",
               "DocumentMoniker": "C:\\Users\\Ehinomhen\\source\\repos\\Portal-Tier-Project-V\\PortalCommunications\\PortalCommunications\\Components\\Pages\\Login.razor",
               "RelativeDocumentMoniker": "PortalCommunications\\Components\\Pages\\Login.razor",
