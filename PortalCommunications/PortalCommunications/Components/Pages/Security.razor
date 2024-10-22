@@ -13,13 +13,291 @@
 
 </div>
 
-<Device />
+@if (DeviceList != null)    
+    { 
+    <table class="device-list">
+        <thead>
+            <tr>
+                <th>Device(s)</th>
+                <th>Location</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        
+        @foreach (var device in DeviceList)
+        {
+            @if (sub)
+            {
+                <tr class="sub-device">
+                    <td>@device.name</td>
+                    <td>@device.getLocation()</td>
+                    <td class="switch">
+                        @if (device.Status)
+                        {
+                            <input type="checkbox" checked />
+                        }
+                        else
+                        {
+                            <input type="checkbox" />
+                        }
+                        <label class="slider"></label>
+                    </td>
+                </tr>
+                flipSub();
+            }
+            else{
+            <tr class="device-item">
+                <td>@device.name</td>
+                <td>@device.getLocation()</td>
+                @if (device.Hub)
+                {
+                    <td class="dropdown-content @(isDropdownOpen ? "show" : "")">
+                    <img src="images/dropdown icon.jpg" alt="Dropdown Icon" class="dropdown-icon" @onclick="ToggleDropdown" style="cursor: pointer;" />
+                    </td>
+                    flipSub();
+                }
+                else
+                {
+                    <td class="switch">
+                        @if (device.Status)
+                        {
+                            <input type="checkbox" checked />
+                        }
+                        else
+                        {
+                            <input type="checkbox"  />
+                        }
+                        <span class="slider"></span>
+                    </td>
+                }
+            </tr>}
+        }
+    </table>
+    }
+    else
+    {
+    <table>
+        <thead>
+            <tr>
+                <th>Device(s)</th>
+                <th>Location</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>No Devices Connected.</tr>
+        </tbody>
+    </table>
+    }
 
 @code {
+    public bool sub = false;
+    public void flipSub()
+    {
+        if (!sub)
+        {
+            sub = true;
+        }
+        else
+        {
+            sub = false;
+        }
+    }
+    private SmartDevice[]? DeviceList;
+
+    #if DEBUG
+    //This function is just to display random items.
+    protected override async Task OnInitializedAsync()
+    {
+    // Simulate asynchronous loading to demonstrate streaming rendering
+    await Task.Delay(500);
+
+    var DeviceName = new[] { "Camera", "Refridgerator", "Doorbell", "Camera", "Thermostat"};
+        bool sub = false;
+    DeviceList = Enumerable.Range(1, 10).Select(index => new SmartDevice
+    {
+    name = DeviceName[Random.Shared.Next(DeviceName.Length)],
+    Status = randomBool(),
+    room = Location.Security,
+    Hub = randomBool(),
+    }).ToArray();
+    }
+    private bool randomBool()
+    {
+    int val = Random.Shared.Next(0,2);
+    if (val !=0)
+    {
+    return true;
+    }
+    return false;
+    }
+    private  Location RandomLocation()
+    {
+    int val = Random.Shared.Next(0, 6);
+    switch (val)
+    {
+    case 0:
+    return Location.None;
+    case 1:
+    return Location.Kitchen;
+    case 2:
+    return Location.Living_Room;
+    case 3:
+    return Location.Bedroom;
+    case 4:
+    return Location.Washroom;
+    case 5:
+    return Location.Security;
+    }
+    return Location.None;
+    }
+    #endif
+
+    private bool isDropdownOpen = false;
+
+    private void ToggleDropdown()
+    {
+        isDropdownOpen = !isDropdownOpen;
+    }
+
+    private class SmartDevice
+    {
+        public required string name { set; get; }
+        public bool Status { set; get; } 
+        public Location room { set; get; }
+        public bool Hub { set; get; }
+        public bool Sub{ set; get; }
+
+        public string getLocation()
+        {
+            string location;
+            if(room != Location.None)
+            {
+                switch (room)
+                {
+                    case Location.Kitchen:
+                        location = "Kitchen";
+                        break;
+                    case Location.Living_Room:
+                        location = "Living Room";
+                        break;
+                    case Location.Bedroom:
+                        location = "Bedroom";
+                        break;
+                    case Location.Washroom:
+                        location = "Washroom";
+                        break;
+                    case Location.Security:
+                        location = "Security";
+                        break;
+                    default:
+                        location = "Error";
+                        break;
+                }
+            }
+            else
+                location = "No Room";
+
+            return location;
+        }
+    
+    }
+        public enum Location {None, Kitchen, Living_Room, Bedroom, Washroom, Security};
 
 }
 
 <style>
+    .device-list {
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .device-item {
+        /* display: flex; */
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background-color: #f5f5f5;
+    }
+    .device-item td{
+        padding: 15px 20px;
+    }
+
+    .sub-device {
+        /* display: flex; */
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        border-bottom: 1px solid #ddd;
+        background-color: #eef7ff; /* Different background color for sub-devices */
+        margin-bottom: 10px;
+        margin-left: 40px; /* Further indent the sub-device to show hierarchy */
+    }
+
+    .sub-device td{
+        padding: 15px 20px;
+    }
+
+    .switch {
+        position: relative;
+         display: inline-block;
+         width: 40px;
+         height: 20px;
+    }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 6px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+    input:checked + .slider {
+        background-color: #4caf50;
+    }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+    /* Dropdown content styling */
+    .dropdown-content {
+        display: none;
+        margin-left: 20px; /* Indent the dropdown to the right */
+    }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+    .dropdown-icon {
+        width: 20px;
+        cursor: pointer;
+    }
+
     .logo-container {
         display: flex;
         justify-content: center;
