@@ -1,4 +1,4 @@
-﻿@page "/login"
+﻿@page "/"
 
 
 <div class="container text-center">
@@ -21,11 +21,11 @@
             <form>
                 <div class="mb-4">
                     <label for="usernameInput" class="form-label">Enter Username</label>
-                    <input type="text" class="form-control" id="usernameInput">
+                    <input type="text" class="form-control" id="usernameInput" required>
                 </div>
                 <div class="mb-4">
                     <label for="passwordInput" class="form-label">Enter Password</label>
-                    <input type="password" class="form-control" id="passwordInput">
+                    <input type="password" class="form-control" id="passwordInput" required>
                 </div>
                 <!-- Adjust col for button width -->
                 <button type="submit" class="btn btn-primary small">Submit</button>
