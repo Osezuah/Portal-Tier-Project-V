@@ -1,4 +1,5 @@
 using PortalCommunications.Components;
+using PortalCommunications.Components.Services;
 
 namespace PortalCommunications
 {
@@ -11,6 +12,14 @@ namespace PortalCommunications
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
+
+
+            // Register HttpClient as a service for AccountService
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7197/") });
+
+
+            // Register AccountService as a scoped service
+            builder.Services.AddScoped<AccountService>();
 
             var app = builder.Build();
 

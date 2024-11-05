@@ -10,6 +10,9 @@ namespace PortalCommunicationsAPI.Data
         }
 
         public DbSet<Device> Devices { get; set; }
+
+        // Define DbSets for each entity/table, e.g., Users
+        public DbSet<User> Users { get; set; }
     }
 
 }
