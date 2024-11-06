@@ -29,10 +29,29 @@ namespace PortalCommunicationsAPI.Data
                 .HasValue<Dehumidifier>("Dehumidifier")
                 .HasValue<SmartOven>("SmartOven");
 
-            //// relationships
-            //modelBuilder.Entity<DeviceLog>().HasOne(log => log.device)
-            //    .WithMany(device => device.DeviceLogs)
-            //    .HasForeignKey(log => log.deviceId);
+            //seed data 
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = 1,
+                    Username = "John Doe",
+                    Email = "JohnDoe@hotmail.com",
+                    Password = "password"
+                },
+                new User
+                {
+                    Id = 2,
+                    Username = "Jane Doe",
+                    Email = "JanDoe@hotmail.com",
+                    Password = "password"
+                },
+                new User
+                {
+                    Id = 3,
+                    Username = "John Smith",
+                    Email = "JohnSmith@hotmail.com",
+                    Password = "password"
+                });
         }
 
         public DbSet<DeviceLog> DeviceLogs { get; set; }
@@ -42,6 +61,9 @@ namespace PortalCommunicationsAPI.Data
         public DbSet<SmartVacuum> SmartVacuums { get; set; }
         public DbSet<Dehumidifier> Dehumidifiers { get; set; }
         public DbSet<SmartOven> SmartOvens { get; set; }
+
+        public DbSet<User> Users { get; set; } //work from the business layer
+
 
     }
 

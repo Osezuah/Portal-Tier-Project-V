@@ -7,6 +7,6 @@
         public string loggedMessage { get; set; }
         public DateTime loggedTime { get; set; } // time of when log was created
 
-        public Device device { get; set; } // navigation property
+        //public Device device { get; set; } // navigation property
     }
 }

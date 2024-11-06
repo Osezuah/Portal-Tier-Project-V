@@ -71,6 +71,52 @@ namespace PortalCommunicationsAPI.Migrations
                     b.ToTable("DeviceLog");
                 });
 
+            modelBuilder.Entity("PortalCommunicationsAPI.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "JohnDoe@hotmail.com",
+                            Password = "password",
+                            Username = "John Doe"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "JanDoe@hotmail.com",
+                            Password = "password",
+                            Username = "Jane Doe"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "JohnSmith@hotmail.com",
+                            Password = "password",
+                            Username = "John Smith"
+                        });
+                });
+
             modelBuilder.Entity("PortalCommunicationsAPI.Models.Dehumidifier", b =>
                 {
                     b.HasBaseType("PortalCommunicationsAPI.Models.Device");
@@ -161,13 +207,11 @@ namespace PortalCommunicationsAPI.Migrations
 
             modelBuilder.Entity("PortalCommunicationsAPI.Models.DeviceLog", b =>
                 {
-                    b.HasOne("PortalCommunicationsAPI.Models.Device", "device")
+                    b.HasOne("PortalCommunicationsAPI.Models.Device", null)
                         .WithMany("DeviceLogs")
                         .HasForeignKey("deviceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("device");
                 });
 
             modelBuilder.Entity("PortalCommunicationsAPI.Models.Device", b =>
