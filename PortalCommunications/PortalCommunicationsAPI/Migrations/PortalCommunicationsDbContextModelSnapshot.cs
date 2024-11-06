@@ -33,6 +33,32 @@ namespace PortalCommunicationsAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Devices");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Alarm",
+                            Status = "Active"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Soundbar",
+                            Status = "Inactive"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Bedroom Light 1",
+                            Status = "Active"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Bedroom Light 2",
+                            Status = "Active"
+                        });
                 });
 
             modelBuilder.Entity("PortalCommunicationsAPI.Models.User", b =>
@@ -52,6 +78,26 @@ namespace PortalCommunicationsAPI.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Password = "admin",
+                            Username = "admin"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            Password = "user",
+                            Username = "user"
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            Password = "user2",
+                            Username = "user2"
+                        });
                 });
 #pragma warning restore 612, 618
         }
