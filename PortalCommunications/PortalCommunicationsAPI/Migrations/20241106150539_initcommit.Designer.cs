@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PortalCommunicationsAPI.Data;
 
@@ -10,9 +11,11 @@ using PortalCommunicationsAPI.Data;
 namespace PortalCommunicationsAPI.Migrations
 {
     [DbContext(typeof(PortalCommunicationsDbContext))]
-    partial class PortalCommunicationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241106150539_initcommit")]
+    partial class initcommit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.10");

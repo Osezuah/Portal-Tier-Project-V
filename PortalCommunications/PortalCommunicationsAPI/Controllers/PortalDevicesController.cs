@@ -17,10 +17,17 @@ namespace PortalCommunicationsAPI.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("devices")]
         public async Task<ActionResult<IEnumerable<Device>>> GetDevices()
         {
             return await _context.Devices.ToListAsync();
         }
+
+        [HttpGet("logs")]
+        public async Task<ActionResult<IEnumerable<DeviceLog>>> GetDeviceLogs()
+        {
+            return await _context.DeviceLogs.ToListAsync();
+        }
+
     }
 }
