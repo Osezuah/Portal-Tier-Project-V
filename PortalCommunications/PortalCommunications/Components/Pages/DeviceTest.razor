@@ -1,0 +1,49 @@
+﻿@page "/devicetest"
+@using PortalCommunications.Services
+@using PortalCommunicationsAPI.Models
+@inject DeviceService DeviceService
+
+<h3>Device Management</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>State</th>
+            <th>Last Updated</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var device in devices)
+        {
+            <tr>
+                <td>@device.Name</td>
+                <td>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch"
+                               checked="@IsDeviceOnline(device)"
+                                />
+                        <label class="form-check-label">@device.State</label>
+                    </div>
+                </td>
+                <td>@device.LastUpdated.ToString("g")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Device> devices = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        devices = await DeviceService.GetDevicesAsync();
+    }
+
+    private bool IsDeviceOnline(Device device)
+    {
+        return device.State == "Online"; // Return true if the device is "Online"
+    }
+
+
+}

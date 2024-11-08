@@ -1,4 +1,5 @@
 using PortalCommunications.Components;
+using PortalCommunications.Services;
 
 namespace PortalCommunications
 {
@@ -11,6 +12,16 @@ namespace PortalCommunications
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
+
+            builder.Services.AddHttpClient("WebAPI", client =>
+            {
+                client.BaseAddress = new Uri(builder.Configuration["WebAPIBaseUrl"] ?? "https://localhost:7068/api");
+            });
+
+
+
+
+            builder.Services.AddScoped<DeviceService>();
 
             var app = builder.Build();
 

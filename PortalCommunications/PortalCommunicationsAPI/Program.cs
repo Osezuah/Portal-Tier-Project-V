@@ -15,6 +15,20 @@ builder.Services.AddDbContext<PortalCommunicationsDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite"));
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.WithOrigins("https://localhost:7197")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+
+        //builder.AllowAnyHeader()
+        //    .AllowAnyMethod()
+        //    .AllowAnyOrigin();
+    });
+});
+
 
 var app = builder.Build();
 
@@ -24,6 +38,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 
