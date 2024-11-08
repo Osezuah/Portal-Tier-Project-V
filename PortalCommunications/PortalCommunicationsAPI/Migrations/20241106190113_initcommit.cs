@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace PortalCommunicationsAPI.Migrations
 {
     /// <inheritdoc />
@@ -40,6 +42,21 @@ namespace PortalCommunicationsAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Username = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DeviceLog",
                 columns: table => new
                 {
@@ -60,6 +77,16 @@ namespace PortalCommunicationsAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Email", "Password", "Username" },
+                values: new object[,]
+                {
+                    { 1, "JohnDoe@hotmail.com", "password", "John Doe" },
+                    { 2, "JanDoe@hotmail.com", "password", "Jane Doe" },
+                    { 3, "JohnSmith@hotmail.com", "password", "John Smith" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_DeviceLog_deviceId",
                 table: "DeviceLog",
@@ -71,6 +98,9 @@ namespace PortalCommunicationsAPI.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DeviceLog");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Device");

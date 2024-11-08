@@ -11,7 +11,7 @@ using PortalCommunicationsAPI.Data;
 namespace PortalCommunicationsAPI.Migrations
 {
     [DbContext(typeof(PortalCommunicationsDbContext))]
-    [Migration("20241106150539_initcommit")]
+    [Migration("20241106190113_initcommit")]
     partial class initcommit
     {
         /// <inheritdoc />
@@ -72,6 +72,52 @@ namespace PortalCommunicationsAPI.Migrations
                     b.HasIndex("deviceId");
 
                     b.ToTable("DeviceLog");
+                });
+
+            modelBuilder.Entity("PortalCommunicationsAPI.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "JohnDoe@hotmail.com",
+                            Password = "password",
+                            Username = "John Doe"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "JanDoe@hotmail.com",
+                            Password = "password",
+                            Username = "Jane Doe"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "JohnSmith@hotmail.com",
+                            Password = "password",
+                            Username = "John Smith"
+                        });
                 });
 
             modelBuilder.Entity("PortalCommunicationsAPI.Models.Dehumidifier", b =>
@@ -164,13 +210,11 @@ namespace PortalCommunicationsAPI.Migrations
 
             modelBuilder.Entity("PortalCommunicationsAPI.Models.DeviceLog", b =>
                 {
-                    b.HasOne("PortalCommunicationsAPI.Models.Device", "device")
+                    b.HasOne("PortalCommunicationsAPI.Models.Device", null)
                         .WithMany("DeviceLogs")
                         .HasForeignKey("deviceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("device");
                 });
 
             modelBuilder.Entity("PortalCommunicationsAPI.Models.Device", b =>
