@@ -30,26 +30,27 @@
             </NavLink>
         </div> *@
 
-        <div class="nav-item px-3">
+        <div class="nav-item px-3">  @*All Devices Link*@
             <NavLink class="nav-link" href="all-devices">
                 <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> All Devices
             </NavLink>
         </div>
 
-        <div class="nav-item px-3">
+        <div class="nav-item px-3">  @*Security Link*@
             <NavLink class="nav-link" href="security">
                 <span class="bi bi-shield-lock-nav-menu" aria-hidden="true"></span> Security
             </NavLink>
         </div>
 
-        <div class="nav-item px-3">
+        <div class="nav-item px-3">  @*Account Link*@
             <NavLink class="nav-link" href="account">
                 <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Account
             </NavLink>
         </div>
         
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="logout">
+        <div class="nav-item px-3"> @*Logout Link*@
+            @*href javascript::void(0) prevents link from routing to another page*@
+            <NavLink class="nav-link" href="javascript::void(0)" onclick="openModal()">
                 <span class="bi bi-box-arrow-right-nav-menu" aria-hidden="true"></span> Logout
             </NavLink>
         </div>
@@ -57,6 +58,36 @@
     </nav>
 </div>
 
+@*Logout pop-up confirmation message*@
+<div class="modal" id="logoutModal">
+    <div class="modal-dialog modal-dialog-centered" data-backdrop="static" data-keyboard="false">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong class="modal-title"> WARNING!!!</strong> @*Title of modal*@
+                @*dismiss button 'X'*@
+                <button type="button" class="btn-close" onclick="closeModal()" aria-label="Close"></button>
+            </div>
 
+            <div class="modal-body">
+                <h5>Are you sure you want to logout?</h5> @*Message in modal*@
+            </div>
+
+            <div class="modal-footer"> @*Confirmation buttons*@
+                <a class="btn btn-danger" href="/"> Yes</a>
+                <button class="btn btn-primary" onclick="closeModal()"> Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal() { @*Function that displays the modal window*@
+        document.getElementById("logoutModal").style.display = "block";
+    }
+
+    function closeModal() { @*Function that closes the modal window*@
+        document.getElementById("logoutModal").style.display = "none";
+    }
+</script>
 
 
