@@ -1,4 +1,4 @@
-﻿namespace PortalCommunicationsAPI.Models
+﻿namespace PortalCommunications.Components.Models;
 {
     public class User
     {
