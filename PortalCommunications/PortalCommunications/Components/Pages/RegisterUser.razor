@@ -1,0 +1,81 @@
+﻿@page "/registerUser"
+@using PortalCommunications.Components.Layout
+@*Custom layout file that removes the navigation bar from this page*@
+@layout EmptyLayout
+
+<div class="container text-center">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <!--Portal image goes here-->
+            <div>
+                <img style="width:150px" src="../images/portal logo.png" />
+            </div>
+            <!-- Adjust col size for the title width -->
+            <h3 class="fw-bold">Register Your Account</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <!-- Adjust col size for input width -->
+            <form>
+                <div class="mb-4">
+                    <label for="usernameInput" class="form-label">Enter Username</label>
+                    <input type="text" class="form-control" id="usernameInput" required>
+                </div>
+                <div class="mb-4">
+                    <label for="passwordInput" class="form-label">Enter Password</label>
+                    <input type="password" class="form-control" id="passwordInput" required>
+                </div>
+                @* match previous password *@
+                <div class="mb-4">
+                    <label for="passwordInput" class="form-label
+                        ">Re-enter Password</label>
+                    <input type="password" class="form-control" id="passwordInput" required>
+                </div>
+
+
+                <!-- Adjust col for button width -->
+                <button type="button" class="btn btn-primary small" onclick="openModal()">Submit</button>
+@*                 <NavLink class="nav-link" href="javascript::void(0)" onclick="openModal()">
+                    <span class="bi bi-box-arrow-right-nav-menu" aria-hidden="true"></span> Logout
+                </NavLink> *@
+            </form>
+        </div>
+    </div>
+</div>
+
+@*Logout pop-up confirmation message*@
+<div class="modal" id="registerModal">
+    <div class="modal-dialog modal-dialog-centered" data-backdrop="static" data-keyboard="false">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong class="modal-title">Success!</strong> @*Title of modal*@
+                @*dismiss button 'X'*@
+                @* <button type="button" class="btn-close" onclick="closeModal()" aria-label="Close"></button> *@
+            </div>
+
+            <div class="modal-body">
+                <h5>User Created Successfully!</h5> @*Message in modal*@
+            </div>
+
+            <div class="modal-footer">
+                @*Confirmation buttons*@
+                <a class="btn btn-primary" href="all-devices"> Continue</a>
+                @* <button class="btn btn-primary" onclick="closeModal()"> Cancel</button> *@
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal() { @*Function that displays the modal window*@
+        document.getElementById("registerModal").style.display = "block";
+    }
+
+    function closeModal() { @*Function that closes the modal window*@
+        document.getElementById("registerModal").style.display = "none";
+    }
+</script>
