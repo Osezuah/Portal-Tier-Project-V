@@ -5,7 +5,7 @@ namespace PortalCommunications
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -39,9 +39,18 @@ namespace PortalCommunications
             app.MapRazorComponents<App>()
                 .AddInteractiveServerRenderMode();
 
-            app.Run();
+            app.MapPut("/api/device-status/", async (DeviceStatus devStatus) =>
+            {
+                //return Results.Ok(new {message = "Device status received and updated"});
+                //return Results.Ok(devStatus);
+            })
+            .WithName("ReceiveDeviceStatus")
+            .WithTags("Device");
+           await app.RunAsync();
         }
     }
+
+    public record DeviceStatus(String device_name, String location, String status);
 }
 
 //test comment
