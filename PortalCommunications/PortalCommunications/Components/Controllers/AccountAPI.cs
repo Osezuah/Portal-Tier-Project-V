@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Configuration;
-using Swashbuckle.AspNetCore.SwaggerGen;
+//using NuGet.Configuration;
+//using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
@@ -65,6 +65,11 @@ namespace BlazorApp1.Components.Controllers
             //}
 
             return result;
+        }
+        [HttpPatch("{id}")]
+        public IActionResult Update(int id)
+        {
+            return BadRequest();
         }
 
         // DELETE api/signup/<ValuesController>/

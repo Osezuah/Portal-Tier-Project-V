@@ -7,11 +7,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\Controllers\UsersController.cs" />
+    <Compile Remove="Components\Models\User.cs" />
+    <Compile Remove="Data\PortalCommunicationsDbContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\Controllers\UsersController.cs" />
+    <None Include="Data\PortalCommunicationsDbContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazored.Modal" Version="7.3.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\Models\User.cs" />
   </ItemGroup>
 
 </Project>

@@ -1,3 +1,4 @@
+using APISeperateFiles;
 using PortalCommunications.Components;
 using PortalCommunications.Components.Services;
 
@@ -39,18 +40,11 @@ namespace PortalCommunications
             app.MapRazorComponents<App>()
                 .AddInteractiveServerRenderMode();
 
-            app.MapPut("/api/device-status/", async (DeviceStatus devStatus) =>
-            {
-                //return Results.Ok(new {message = "Device status received and updated"});
-                //return Results.Ok(devStatus);
-            })
-            .WithName("ReceiveDeviceStatus")
-            .WithTags("Device");
+            DeviceStatusAPI.Map(app);
+
            await app.RunAsync();
         }
     }
-
-    public record DeviceStatus(String device_name, String location, String status);
 }
 
 //test comment
