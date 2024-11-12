@@ -40,7 +40,7 @@ namespace PortalCommunications
             app.MapRazorComponents<App>()
                 .AddInteractiveServerRenderMode();
 
-            DeviceStatusAPI.Map(app);
+            APIEndpoints.Map(app);
 
            await app.RunAsync();
         }

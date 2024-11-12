@@ -2,7 +2,7 @@
 using System.Text.Json;
 namespace APISeperateFiles;
 
-public class DeviceStatusAPI
+public class APIEndpoints
 {
     public static void Map(WebApplication app) 
     {
