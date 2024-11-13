@@ -12,6 +12,7 @@ namespace PortalCommunications.Components.Authorization
         {
             authenticationState = new AuthenticationState(service.CurrentUser);
 
+
             service.UserChanged += (newUser) =>
             {
                 authenticationState = new AuthenticationState(newUser);

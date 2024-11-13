@@ -1,4 +1,12 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@rendermode InteractiveServer
+
+@using Microsoft.AspNetCore.Components.Authorization
+@using PortalCommunications.Components.Services
+@using System.Security.Claims
+@inject CustomAuthenticationService AuthService
+@inject NavigationManager NavigationManager
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Smart Home Portal</a> @*Navigation Bar Title*@
     </div>
@@ -34,10 +42,7 @@
         </div>
         
         <div class="nav-item px-3"> @*Logout Link*@
-            @*href javascript::void(0) prevents link from routing to another page*@
-            <NavLink class="nav-link" href="javascript::void(0)" onclick="openModal()">
-                <span class="bi bi-box-arrow-right-nav-menu" aria-hidden="true"></span> Logout
-            </NavLink>
+            <button class="btn btn-primary" @onclick="Logout">Logout</button>
         </div>
 
     </nav>
@@ -74,5 +79,15 @@
         document.getElementById("logoutModal").style.display = "none";
     }
 </script>
+
+@code{
+    //logout function
+    private void Logout()
+    {
+        //reset the auth service
+        AuthService.CurrentUser = new ClaimsPrincipal(); //reset the user
+        NavigationManager.NavigateTo("/");
+    }
+}
 
 
