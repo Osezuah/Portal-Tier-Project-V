@@ -1,7 +1,22 @@
 ﻿@page "/"
+@rendermode InteractiveServer
 @using PortalCommunications.Components.Layout
 @*Custom layout file that removes the navigation bar from this page*@
 @layout EmptyLayout 
+@using Microsoft.AspNetCore.Components.Authorization
+@using PortalCommunications.Components.Services
+@using System.Security.Claims
+@inject CustomAuthenticationService AuthService
+@inject NavigationManager NavigationManager
+
+<AuthorizeView>
+    <Authorized>
+        <p>Hello, @context.User.Identity?.Name!</p>
+    </Authorized>
+    <NotAuthorized>
+        <p>You're not authorized.</p>
+    </NotAuthorized>
+</AuthorizeView>
 
 <div class="container text-center">
     <div class="row justify-content-center">
@@ -23,16 +38,16 @@
             <form>
                 <div class="mb-4">
                     <label for="usernameInput" class="form-label">Enter Username</label>
-                    <input type="text" class="form-control" id="usernameInput" required>
+                    <input @bind="userIdentifier" tabindex="userIdentifier" type="text" class="form-control" id="usernameInput" required>
                 </div>
-                <div class="mb-4">
+@*                 <div class="mb-4">
                     <label for="passwordInput" class="form-label">Enter Password</label>
                     <input type="password" class="form-control" id="passwordInput" required>
-                </div>
+                </div> *@
                 <!-- Adjust col for button width -->
-                <button type="submit" class="btn btn-primary small" formaction="/all-devices">Submit</button>
+                 <button @onclick="SignIn" type="button" class="btn btn-primary small">Login</button>
 
-                <a href="/registeruser" class="btn btn-primary small" >Register</a>
+                @* <a href="/registeruser" class="btn btn-primary small" >Register</a> *@
 
             </form>
         </div>
@@ -40,4 +55,19 @@
 </div>
 
 @code {
+    public string userIdentifier = string.Empty;
+    public string hellomessage = string.Empty;
+    private void SignIn()
+    {
+        var identity = new ClaimsIdentity(new[]
+        {
+        new Claim(ClaimTypes.Name, userIdentifier),
+    }, "Custom Authentication");
+
+        var newUser = new ClaimsPrincipal(identity);
+        AuthService.CurrentUser = newUser;
+
+        //redirect to /security page
+        NavigationManager.NavigateTo("/security");
+    }
 }

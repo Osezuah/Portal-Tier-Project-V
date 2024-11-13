@@ -1,5 +1,7 @@
 using APISeperateFiles;
+using Microsoft.AspNetCore.Components.Authorization;
 using PortalCommunications.Components;
+using PortalCommunications.Components.Authorization;
 using PortalCommunications.Components.Services;
 
 namespace PortalCommunications
@@ -13,6 +15,15 @@ namespace PortalCommunications
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
+
+            builder.Services.AddCascadingAuthenticationState();
+
+            builder.Services.AddServerSideBlazor();
+
+
+            builder.Services.AddSingleton<CustomAuthenticationService>();
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+            builder.Services.AddAuthorizationCore();
 
 
             // Register HttpClient as a service for AccountService
