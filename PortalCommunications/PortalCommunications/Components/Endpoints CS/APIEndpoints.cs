@@ -13,7 +13,7 @@ public class APIEndpoints
         });
 
         //This will be used to get a specific device
-        app.MapGet("/api/{id}", async context =>
+        app.MapGet("/api/{id}", async (JsonElement JSobject) =>
         {
             
         });
@@ -24,6 +24,10 @@ public class APIEndpoints
         
         //Create a route that registers devices Rian
 
-        //create a route that registers a new user Ehi
+        //create a route that registers a new user
+        app.MapPost("/api/register-user/", async (JsonElement JSobject) =>
+        {
+
+        });
     }
 }
