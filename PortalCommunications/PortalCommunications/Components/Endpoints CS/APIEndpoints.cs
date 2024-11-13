@@ -15,7 +15,7 @@ public class APIEndpoints
         });
 
         //This will be used to get a specific device
-        app.MapGet("/api/{id}", async (JsonElement JSobject) =>
+        app.MapGet("/api/device/{id}", async (int Idnumber) =>
         {
 
         });
