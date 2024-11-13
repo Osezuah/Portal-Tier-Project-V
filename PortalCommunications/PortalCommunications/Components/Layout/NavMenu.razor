@@ -40,10 +40,14 @@
                 <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Account
             </NavLink>
         </div>
-        
-        <div class="nav-item px-3"> @*Logout Link*@
-            <button class="btn btn-primary" @onclick="Logout">Logout</button>
+        <div class="nav-item px-3">
+            @*Logout*@
+            <NavLink class="nav-link" href="#" @onclick="Logout">
+                <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Logout
+            </NavLink>
         </div>
+        
+
 
     </nav>
 </div>
