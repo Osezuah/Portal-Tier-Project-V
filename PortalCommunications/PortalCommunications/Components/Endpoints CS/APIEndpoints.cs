@@ -21,6 +21,10 @@ public class APIEndpoints
         });
 
         ////Create a route that will authenticate user login credentials - Go to line 33 in Login.razor to chaange the formaction link Thomas
+        ///
+        app.MapGet("/api/user", async (JsonElement JSobject) =>
+        {
+        });
 
         ////Create a route that sends changes user makes to device in the ui to home application
         //app.MapPut("/api/device-changes/", async (JsonElement JSobject) =>
