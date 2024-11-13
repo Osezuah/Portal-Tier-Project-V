@@ -15,7 +15,7 @@ public class APIEndpoints
         });
 
         //This will be used to get a specific device
-        app.MapGet("/api/device/{id}", async (int Idnumber) =>
+        app.MapGet("/api/device/{int Idnumber}", async (Idnumber) =>
         {
 
         });
@@ -30,9 +30,28 @@ public class APIEndpoints
 
         //Create a route that registers devices
         //Expecting a single device within the passed JSON Element.
-        app.MapPost("/api/register-devices/", async (JsonDocument payload) =>
+        app.MapPost("/api/register-device/", async (JsonDocument payload) =>
         {
+            //Extract devicetype from json Document. Json Document is read-only, if write access is needed: change to JsonNode
+            JsonElement root = payload.RootElement;
+            string deviceType = string.Empty;
+
+            try
+            {
+                deviceType = root.GetProperty("device-type").ToString();
+            }
+            catch (KeyNotFoundException)
+            {
+                return "device-type not found";
+                throw;
+            }
             
+            Console.WriteLine("Identified Device type as: " + deviceType);
+            
+            //Business Layer Function(Pass RootElement and DeviceType)
+
+            //Return message
+            return deviceType;
         });
 
 
