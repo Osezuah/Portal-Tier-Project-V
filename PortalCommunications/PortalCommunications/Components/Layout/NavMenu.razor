@@ -42,7 +42,7 @@
         </div>
         <div class="nav-item px-3">
             @*Logout*@
-            <NavLink class="nav-link" href="#" @onclick="Logout">
+            <NavLink class="nav-link" style="cursor: pointer"  onclick="openModal()">
                 <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Logout
             </NavLink>
         </div>
@@ -67,7 +67,7 @@
             </div>
 
             <div class="modal-footer"> @*Confirmation buttons*@
-                <a class="btn btn-danger" href="/"> Yes</a>
+                <a class="btn btn-danger" href="#" @onclick="Logout"> Yes</a>
                 <button class="btn btn-primary" onclick="closeModal()"> Cancel</button>
             </div>
         </div>
