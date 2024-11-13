@@ -22,7 +22,7 @@ public class APIEndpoints
 
         ////Create a route that will authenticate user login credentials - Go to line 33 in Login.razor to chaange the formaction link Thomas
         ///
-        app.MapGet("/api/user", async (JsonElement JSobject) =>
+        app.MapGet("/api/user", async (user) =>
         {
         });
 
