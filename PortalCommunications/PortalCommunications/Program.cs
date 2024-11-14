@@ -1,4 +1,7 @@
+using APISeperateFiles;
+using Microsoft.AspNetCore.Components.Authorization;
 using PortalCommunications.Components;
+using PortalCommunications.Components.Authorization;
 using PortalCommunications.Components.Services;
 
 namespace PortalCommunications
@@ -12,6 +15,15 @@ namespace PortalCommunications
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
+
+            builder.Services.AddCascadingAuthenticationState();
+
+            builder.Services.AddServerSideBlazor();
+
+
+            builder.Services.AddSingleton<CustomAuthenticationService>();
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+            builder.Services.AddAuthorizationCore();
 
 
             // Register HttpClient as a service for AccountService
@@ -39,18 +51,11 @@ namespace PortalCommunications
             app.MapRazorComponents<App>()
                 .AddInteractiveServerRenderMode();
 
-            app.MapPut("/api/device-status/", async (DeviceStatus devStatus) =>
-            {
-                //return Results.Ok(new {message = "Device status received and updated"});
-                //return Results.Ok(devStatus);
-            })
-            .WithName("ReceiveDeviceStatus")
-            .WithTags("Device");
+            APIEndpoints.Map(app);
+
            await app.RunAsync();
         }
     }
-
-    public record DeviceStatus(String device_name, String location, String status);
 }
 
 //test comment
