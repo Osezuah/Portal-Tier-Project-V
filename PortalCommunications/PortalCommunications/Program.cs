@@ -20,6 +20,8 @@ namespace PortalCommunications
 
             builder.Services.AddServerSideBlazor();
 
+            builder.Services.AddBlazorBootstrap();
+
 
             builder.Services.AddSingleton<CustomAuthenticationService>();
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();

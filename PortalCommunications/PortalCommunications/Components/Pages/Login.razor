@@ -2,7 +2,7 @@
 @rendermode InteractiveServer
 @using PortalCommunications.Components.Layout
 @*Custom layout file that removes the navigation bar from this page*@
-@layout EmptyLayout 
+@layout EmptyLayout
 @using Microsoft.AspNetCore.Components.Authorization
 @using PortalCommunications.Components.Services
 @using System.Security.Claims
@@ -18,41 +18,54 @@
     </NotAuthorized>
 </AuthorizeView>
 
-<div class="container text-center">
-    <div class="row justify-content-center">
-        <div class="col-8">
-            <!--Portal image goes here-->
-            <div>
-                <img style="width:150px" src="../images/portal logo.png" />
-            </div>
-            <!-- Adjust col size for the title width -->
-            <h3 class="fw-bold">Welcome to Portal</h3>
-        </div>
-    </div>
-</div>
 
-<div class="container mt-4">
+
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-6">
-            <!-- Adjust col size for input width -->
-            <form>
-                <div class="mb-4">
-                    <label for="usernameInput" class="form-label">Enter Username</label>
-                    <input @bind="userIdentifier" tabindex="userIdentifier" type="text" class="form-control" id="usernameInput" required>
+            <!-- Adjust col size for the card width -->
+            <div class="card">
+                <div class="card-body shadow p-3 rounded">
+                    <div class="container text-center">
+                        <div class="row justify-content-center">
+                            <div class="col-8">
+                                <!--Portal image goes here-->
+                                <div>
+                                    <img style="width:150px" src="../images/portal logo.png" />
+                                </div>
+                                <!-- Adjust col size for the title width -->
+                                <h3 class="fw-bold">Welcome to Portal</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <form @onsubmit="SignIn">
+                        <div class="mb-2">
+                            @* <label for="usernameInput" class="form-label">Enter Username</label> *@
+                            <input @bind="userIdentifier" tabindex="userIdentifier" type="text" class="form-control" id="usernameInput" required placeholder="Enter Username">
+                        </div>
+                        <div class="mb-2">
+                            @* <label for="passwordInput" class="form-label">Enter Password</label> *@
+                            <input tabindex="passwordIdentifier" type="password" class="form-control" id="passwordInput" placeholder="Not in Use...">
+                        </div>
+                        <!-- Adjust col for button width -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary small">Login</button>
+                            <div class=" container text-center">
+                                <div class="row justify-content-center mb-2">
+                                    <strong>OR</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="d-grid gap-2">
+                        <a type="button" class="btn btn-primary small" href="/registeruser">Register</a>
+                    </div>
                 </div>
-@*                 <div class="mb-4">
-                    <label for="passwordInput" class="form-label">Enter Password</label>
-                    <input type="password" class="form-control" id="passwordInput" required>
-                </div> *@
-                <!-- Adjust col for button width -->
-                 <button @onclick="SignIn" type="button" class="btn btn-primary small">Login</button>
-
-                @* <a href="/registeruser" class="btn btn-primary small" >Register</a> *@
-
-            </form>
+            </div>
         </div>
     </div>
 </div>
+
 
 @code {
     public string userIdentifier = string.Empty;
