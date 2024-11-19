@@ -1,7 +1,6 @@
 ﻿@page "/"
 @rendermode InteractiveServer
 @using PortalCommunications.Components.Layout
-@*Custom layout file that removes the navigation bar from this page*@
 @layout EmptyLayout
 @using Microsoft.AspNetCore.Components.Authorization
 @using PortalCommunications.Components.Services
@@ -18,47 +17,38 @@
     </NotAuthorized>
 </AuthorizeView>
 
-
-
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-6">
-            <!-- Adjust col size for the card width -->
-            <div class="card">
-                <div class="card-body shadow p-3 rounded">
-                    <div class="container text-center">
-                        <div class="row justify-content-center">
-                            <div class="col-8">
-                                <!--Portal image goes here-->
-                                <div>
-                                    <img style="width:150px" src="../images/portal logo.png" />
-                                </div>
-                                <!-- Adjust col size for the title width -->
-                                <h3 class="fw-bold">Welcome to Portal</h3>
-                            </div>
-                        </div>
-                    </div>
+    <div class="row justify-content-center align-items-center vh-100">
+        <div class="col-12 col-md-6 col-lg-4">
+            <!-- Card Wrapper -->
+            <div class="card shadow p-4 rounded">
+                <div class="card-body text-center">
+                    <!-- Responsive Image -->
+                    <img src="../images/portal logo.png" alt="Portal Logo" class="img-fluid mb-3" style="max-width: 150px;">
+                    <!-- Responsive Title -->
+                    <h3 class="fw-bold mb-4">Welcome to Portal</h3>
+
+                    <!-- Login Form -->
                     <form @onsubmit="SignIn">
-                        <div class="mb-2">
-                            @* <label for="usernameInput" class="form-label">Enter Username</label> *@
+                        <div class="mb-3">
                             <input @bind="userIdentifier" tabindex="userIdentifier" type="text" class="form-control" id="usernameInput" required placeholder="Enter Username">
                         </div>
-                        <div class="mb-2">
-                            @* <label for="passwordInput" class="form-label">Enter Password</label> *@
+                        <div class="mb-3">
                             <input tabindex="passwordIdentifier" type="password" class="form-control" id="passwordInput" placeholder="Not in Use...">
                         </div>
-                        <!-- Adjust col for button width -->
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary small">Login</button>
-                            <div class=" container text-center">
-                                <div class="row justify-content-center mb-2">
-                                    <strong>OR</strong>
-                                </div>
-                            </div>
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn btn-primary">Login</button>
                         </div>
                     </form>
-                    <div class="d-grid gap-2">
-                        <a type="button" class="btn btn-primary small" href="/registeruser">Register</a>
+
+                    <!-- OR Separator -->
+                    <div class="mb-3">
+                        <span class="text-muted">OR</span>
+                    </div>
+
+                    <!-- Register Button -->
+                    <div class="d-grid">
+                        <a class="btn btn-outline-primary" href="/registeruser">Register</a>
                     </div>
                 </div>
             </div>
@@ -66,21 +56,19 @@
     </div>
 </div>
 
-
 @code {
     public string userIdentifier = string.Empty;
-    public string hellomessage = string.Empty;
     private void SignIn()
     {
         var identity = new ClaimsIdentity(new[]
         {
-        new Claim(ClaimTypes.Name, userIdentifier),
-    }, "Custom Authentication");
+            new Claim(ClaimTypes.Name, userIdentifier),
+        }, "Custom Authentication");
 
         var newUser = new ClaimsPrincipal(identity);
         AuthService.CurrentUser = newUser;
 
-        //redirect to /security page
+        // Redirect to /all-devices page
         NavigationManager.NavigateTo("/all-devices");
     }
 }
