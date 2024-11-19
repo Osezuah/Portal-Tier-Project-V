@@ -8,6 +8,16 @@ public class APIEndpoints
 {
     public static void Map(WebApplication app)
     {
+
+        //route to get a list of devices and return them
+        app.MapGet("/api/devices", async () =>
+        {
+            //return a list of devices (for testing)
+            return new List<string> { "Device1", "Device2", "Device3" };
+
+
+        });
+
         app.MapGet("api/debug-get/", async () =>
         {
             string message = "debug Message";
