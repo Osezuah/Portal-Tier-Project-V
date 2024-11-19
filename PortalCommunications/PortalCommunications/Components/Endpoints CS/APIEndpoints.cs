@@ -8,6 +8,16 @@ public class APIEndpoints
 {
     public static void Map(WebApplication app)
     {
+        app.MapGet("api/debug-get/", async () =>
+        {
+            string message = "debug Message";
+            Console.WriteLine("Debug API route called.");
+
+            return message;
+        }
+        );
+
+
         ////route that accepts changes made to devices on Home
         app.MapPut("/api/device-status/", async (JsonElement JSobject) =>
         {
@@ -21,8 +31,7 @@ public class APIEndpoints
         });
 
         ////Create a route that will authenticate user login credentials - Go to line 33 in Login.razor to chaange the formaction link Thomas
-        ///
-        app.MapGet("/api/user", async (user) =>
+        app.MapGet("/api/user/", async (user) =>
         {
         });
 
