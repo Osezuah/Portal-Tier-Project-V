@@ -1,76 +1,69 @@
 ﻿@page "/all-devices"
+@using PortalCommunications.Services
+@using PortalCommunicationsAPI.Models
+@inject DeviceService DeviceService
 
 <PageTitle>All Devices</PageTitle>
 
-<div class="main-content">
-    <div class="header">
-        <div class="logo-container">
-            <img src="images/portal logo.png" alt="Portal Logo" class="portal-logo">
-        </div>
-    </div>
+<div class="container text-center">
+    <img src="images/portal logo.png" alt="Portal Logo" style="width: 150px;">
+    <h3 class="display-5">
+        Security Devices
+    </h3>
+    <small class="text-body-secondary">Monitor your security devices here.</small>
+</div>
 
-    <h1>All Devices</h1>
-
-    <p>Here you can manage all your smart devices.</p>
-
-    <!-- Device Management Section -->
-    <div class="device-list">
-        <!-- Smart Fridge -->
-        <div class="device-item">
-            <span class="device-name">Smart Fridge</span>
-            <span class="device-location">Kitchen</span>
-            <label class="switch">
-                <input type="checkbox" checked />
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <!-- Smart Toaster -->
-        <div class="device-item">
-            <span class="device-name">Smart Toaster</span>
-            <span class="device-location">Kitchen</span>
-            <label class="switch">
-                <input type="checkbox" />
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <!-- Smart Security System with Dropdown -->
-        <div class="device-item">
-            <span class="device-name">Smart Security System</span>
-            <span class="device-location">Security</span>
-            <img src="images/dropdown icon.jpg" alt="Dropdown Icon" class="dropdown-icon" @onclick="ToggleDropdown" style="cursor: pointer;" />
-        </div>
-
-        <!-- Sub-device (Dropdown content) -->
-        <div class="dropdown-content @(isDropdownOpen ? "show" : "")">
-            <div class="sub-device">
-                <span class="sub-device-name">Security Camera</span>
-                <label class="switch">
-                    <input type="checkbox" checked />
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
-
-        <!-- Smart Coffee Maker -->
-        <div class="device-item">
-            <span class="device-name">Smart Coffee Maker</span>
-            <span class="device-location">Kitchen</span>
-            <label class="switch">
-                <input type="checkbox" />
-                <span class="slider"></span>
-            </label>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="card-body">
+            @if (devices?.Any() == true)
+            {
+                <table class="table table-striped table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Device(s)</th>
+                            <th>State</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var device in devices)
+                        {
+                            <tr>
+                                <td>@device.Name</td>
+                                <td>@device.State</td>
+                                <td>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch"
+                                               checked="@IsDeviceOnline(device)" />
+                                        <label class="form-check-label">@device.State</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-info text-center" role="alert">
+                    No devices connected.
+                </div>
+            }
         </div>
     </div>
 </div>
 
 @code {
-    private bool isDropdownOpen = false;
+    private List<Device> devices = new();
 
-    private void ToggleDropdown()
+    protected override async Task OnInitializedAsync()
     {
-        isDropdownOpen = !isDropdownOpen;
+        devices = await DeviceService.GetDevicesAsync();
+    }
+
+    private bool IsDeviceOnline(Device device)
+    {
+        return device.State == "Online"; // Return true if the device is "Online"
     }
 }
-
