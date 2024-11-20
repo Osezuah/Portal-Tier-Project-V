@@ -1,5 +1,4 @@
 ﻿@page "/"
-@rendermode InteractiveServer
 @using PortalCommunications.Components.Layout
 @layout EmptyLayout
 @using Microsoft.AspNetCore.Components.Authorization
@@ -49,6 +48,8 @@
     </div>
 </div>
 
+
+
 @code {
     public string userIdentifier = string.Empty;
     private void SignIn()
@@ -64,6 +65,8 @@
         // Redirect to /all-devices page
         NavigationManager.NavigateTo("/all-devices");
     }
+
+
 }
 
 
