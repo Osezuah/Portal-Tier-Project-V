@@ -25,4 +25,8 @@
     <Folder Include="Components\Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PortalCommunicationsAPI\PortalCommunicationsAPI.csproj" />
+  </ItemGroup>
+
 </Project>

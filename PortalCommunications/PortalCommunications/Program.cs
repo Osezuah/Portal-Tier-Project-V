@@ -1,4 +1,3 @@
-using APISeperateFiles;
 using Microsoft.AspNetCore.Components.Authorization;
 using PortalCommunications.Components;
 using PortalCommunications.Components.Authorization;
@@ -57,7 +56,6 @@ namespace PortalCommunications
             app.MapRazorComponents<App>()
                 .AddInteractiveServerRenderMode();
 
-            APIEndpoints.Map(app);
 
            await app.RunAsync();
         }
