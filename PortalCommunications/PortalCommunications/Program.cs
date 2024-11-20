@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using PortalCommunications.Components;
 using PortalCommunications.Components.Authorization;
 using PortalCommunications.Components.Services;
+using PortalCommunications.Services;
 
 namespace PortalCommunications
 {
@@ -17,6 +18,11 @@ namespace PortalCommunications
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
 
+            builder.Services.AddHttpClient("WebAPI", client =>
+            {
+                client.BaseAddress = new Uri(builder.Configuration["WebAPIBaseUrl"] ?? "https://localhost:7068/api");
+            });
+
 
 
             builder.Services.AddCascadingAuthenticationState();
@@ -29,14 +35,12 @@ namespace PortalCommunications
             builder.Services.AddSingleton<CustomAuthenticationService>();
             builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
             builder.Services.AddAuthorizationCore();
-
-
-            // Register HttpClient as a service for AccountService
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7197/") });
+            builder.Services.AddScoped<DeviceService>();
 
 
             // Register AccountService as a scoped service
             builder.Services.AddScoped<AccountService>();
+
 
             var app = builder.Build();
 
@@ -57,7 +61,7 @@ namespace PortalCommunications
                 .AddInteractiveServerRenderMode();
 
 
-           await app.RunAsync();
+            app.Run();
         }
     }
 }
