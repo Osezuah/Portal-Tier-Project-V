@@ -1,27 +1,43 @@
+using APISeperateFiles;
+using Microsoft.AspNetCore.Components.Authorization;
 using PortalCommunications.Components;
-using PortalCommunications.Services;
+using PortalCommunications.Components.Authorization;
+using PortalCommunications.Components.Services;
 
 namespace PortalCommunications
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddBlazorBootstrap();
 
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
 
-            builder.Services.AddHttpClient("WebAPI", client =>
-            {
-                client.BaseAddress = new Uri(builder.Configuration["WebAPIBaseUrl"] ?? "https://localhost:7068/api");
-            });
 
 
+            builder.Services.AddCascadingAuthenticationState();
+
+            builder.Services.AddServerSideBlazor();
+
+            builder.Services.AddScoped<BlazorBootstrap.ModalService>();
 
 
-            builder.Services.AddScoped<DeviceService>();
+            builder.Services.AddSingleton<CustomAuthenticationService>();
+            builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+            builder.Services.AddAuthorizationCore();
+
+
+            // Register HttpClient as a service for AccountService
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7197/") });
+
+
+            // Register AccountService as a scoped service
+            builder.Services.AddScoped<AccountService>();
 
             var app = builder.Build();
 
@@ -41,7 +57,9 @@ namespace PortalCommunications
             app.MapRazorComponents<App>()
                 .AddInteractiveServerRenderMode();
 
-            app.Run();
+            APIEndpoints.Map(app);
+
+           await app.RunAsync();
         }
     }
 }

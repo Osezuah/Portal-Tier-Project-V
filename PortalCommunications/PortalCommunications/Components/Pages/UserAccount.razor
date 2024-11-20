@@ -1,4 +1,7 @@
 ﻿@page "/account"
+@inject PortalCommunications.Components.Services.AccountService AccountService
+@inject NavigationManager NavigationManager
+
 <PageTitle>My Account</PageTitle>
 
 <!--Portal logo-->
@@ -31,7 +34,62 @@
 <!--Edit and Delete Account Links-->
 <div class="container">
     <a href="#" class="editacc"> Edit Account</a>
-    <a href="#" class="delacc"> Delete Account</a>
+    <a class="delacc" @onclick="ShowConfirmation" >Delete Account</a>
 </div>
 
+<!-- Success Message -->
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert mt-3 @(isDeletionSuccessful ? "alert-success" : "alert-danger")">
+        @successMessage
+    </div>
+}
 
+
+<!-- Confirmation Popup -->
+@if (showConfirmation)
+{
+    <div class="confirmation-overlay">
+        <div class="confirmation-box">
+            <p>Are you sure you want to delete your account?</p>
+            <button class="btn btn-danger" @onclick="ConfirmDelete">Yes</button>
+            <button class="btn btn-secondary" @onclick="CancelDelete">No</button>
+        </div>
+    </div>
+}
+
+@code {
+    private bool showConfirmation = false;
+    private int userId = 1; // For testing
+    private string successMessage = string.Empty; // Variable to hold the success message
+    private bool isDeletionSuccessful = true; // Variable to control message color based on success or failure
+
+    private void ShowConfirmation()
+    {
+        showConfirmation = true;
+    }
+
+    private async Task ConfirmDelete()
+    {
+        showConfirmation = false;
+        bool isDeleted = await AccountService.DeleteAccountAsync(userId);
+
+        if (isDeleted)
+        {
+            successMessage = "Account successfully deleted.";
+            isDeletionSuccessful = true;
+            await Task.Delay(2000); // Wait for 2 seconds before redirecting
+            NavigationManager.NavigateTo("/login");
+        }
+        else
+        {
+            successMessage = "Failed to delete account.";
+            isDeletionSuccessful = false;
+        }
+    }
+
+    private void CancelDelete()
+    {
+        showConfirmation = false;
+    }
+}
