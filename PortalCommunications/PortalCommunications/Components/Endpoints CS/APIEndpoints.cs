@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using PortalCommunications.Components.Device_Class;
 using PortalCommunications.Components.Pages;
+using Microsoft.AspNetCore.Mvc;
 namespace APISeperateFiles;
 
 public class APIEndpoints
@@ -11,7 +12,7 @@ public class APIEndpoints
     public static void Map(WebApplication app)
     {
         ////route that accepts changes made to devices on Home
-        app.MapPut("/api/device-status/", async (JsonDocument JSobject) =>
+        app.MapPut("/api/device-status/", async ( JsonDocument JSobject) =>
         {
             
     
@@ -92,7 +93,7 @@ public class APIEndpoints
         });
 
         //This will be used to get a specific device
-        app.MapGet("/api/device/{Idnumber:int}", async (int Idnumber) =>
+        app.MapGet("/api/device/{int Idnumber}", async (int Idnumber) =>
         {
 /*            //Device deviceData = GetDeviceById(Idnumber);
 
@@ -113,7 +114,7 @@ public class APIEndpoints
 
         ////Create a route that will authenticate user login credentials - Go to line 33 in Login.razor to chaange the formaction link Thomas
         ///
-        app.MapGet("/api/user", async (JsonDocument JSobject) =>
+        app.MapGet("/api/user", async ( JsonDocument JSobject) =>
         {
 
 /*            User user = JsonSerializer.Deserialize<User>(JSobject.RootElement.GetRawText());
