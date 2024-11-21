@@ -67,7 +67,7 @@
         var newUser = new ClaimsPrincipal(identity);
         AuthService.CurrentUser = newUser;
 
-        //redirect to /security page
-        NavigationManager.NavigateTo("/security");
+        //redirect to /security page - Ehi changed it to all-devices page
+        NavigationManager.NavigateTo("/all-devices");
     }
 }

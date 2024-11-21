@@ -27,15 +27,15 @@
 <!--Username and Password Display-->
 <div>
     <p class="des"> Username:</p>
-    <h4 class="dataBorder">Username</h4>
-    <p class="des">Password:</p>
-    <h4 class="dataBorder">Password</h4>
+    <h4 class="dataBorder">@username</h4> @*for testing*@
+    @*<p class="des">Password:e</p>
+    <h4 class="dataBorder">Password</h4>*@
 </div>
 
 <!--Edit and Delete Account Links-->
 <div class="container">
-    <a href="#" class="editacc"> Edit Account</a>
-    <a class="delacc" @onclick="ShowConfirmation" >Delete Account</a>
+    <a class="editacc"> Edit Account</a>
+    <a class="delacc" @onclick="GetUsernameAsync">Delete Account</a> @* just to test *@
 </div>
 
 <!-- Success Message -->
@@ -93,4 +93,35 @@
     {
         showConfirmation = false;
     }
+
+    //api route tasks
+    private bool isLoading = true;
+    private string? username;
+
+    private async Task<string> GetUsernameAsync(){
+        using var client = new HttpClient();
+        client.BaseAddress = new Uri("https://localhost:7197");
+        //create the JSON payload
+        var user = new { FirstName = "John", LastName = "Doe" };
+
+        var response = await client.PostAsJsonAsync("/api/user", user);
+        try{
+            if (response.IsSuccessStatusCode){
+                username = await response.Content.ReadAsStringAsync();
+                return username;
+            }
+            else{
+                username = "Error: " + response.ReasonPhrase;
+                return username;
+            }
+        }  
+        catch (Exception ex){
+            username = $"Exception: {ex.Message}";
+            return username;
+        }
+        finally{
+                isLoading = false; // Update the loading state
+        }
+    }
+
 }
