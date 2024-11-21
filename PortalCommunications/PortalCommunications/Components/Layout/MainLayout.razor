@@ -15,21 +15,22 @@
     </FooterTemplate>
 </Modal>
 
-<div class="bb-page">
+<div class="bb-page container-fluid">
     <NavMenu />
     <main>
+        <!-- Logout button placed at the top right -->
+        <div>
+            <Button Color="ButtonColor.Danger" @onclick="OnShowModalClick">
+                <i class="bi bi-box-arrow-right"></i> Logout
+            </Button>
+        </div>
         <article class="content px-4">
             @Body
         </article>
     </main>
 </div>
 
-<!-- Logout button placed at the top right -->
-<div class="logout-button-container">
-    <Button Color="ButtonColor.Danger" @onclick="OnShowModalClick">
-        <i class="bi bi-box-arrow-right"></i> Logout
-    </Button>
-</div>
+
 
 <div id="blazor-error-ui">
     An unhandled error has occurred.
@@ -76,11 +77,3 @@
         }
     }
 }
-<style>
-    .logout-button-container {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 9999; /* Ensure the button stays on top */
-    }
-</style>
