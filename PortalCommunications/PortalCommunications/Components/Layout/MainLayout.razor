@@ -1,22 +1,34 @@
 ﻿@using Microsoft.AspNetCore.Components.Authorization
+@using PortalCommunications.Components.Services
+@using System.Security.Claims
 @inherits LayoutComponentBase
 @inject NavigationManager NavigationManager
+@inject CustomAuthenticationService AuthService
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<Modal @ref="modal" title="Confirm Logout" IsVerticallyCentered="true">
+    <BodyTemplate>
+        <p>Are you sure you want to logout?</p>
+    </BodyTemplate>
+    <FooterTemplate>
+        <Button Color="ButtonColor.Secondary" @onclick="OnHideModalClick">Cancel</Button>
+        <Button Color="ButtonColor.Primary" @onclick="Logout">Logout</Button>
+    </FooterTemplate>
+</Modal>
 
+<div class="bb-page">
+    <NavMenu />
     <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
-
         <article class="content px-4">
             @Body
-            <Modal IsServiceModal="true" />
         </article>
     </main>
+</div>
+
+<!-- Logout button placed at the top right -->
+<div class="logout-button-container">
+    <Button Color="ButtonColor.Danger" @onclick="OnShowModalClick">
+        <i class="bi bi-box-arrow-right"></i> Logout
+    </Button>
 </div>
 
 <div id="blazor-error-ui">
@@ -26,7 +38,26 @@
 </div>
 
 @code {
+    private Modal modal = default!;
     private string authMessage = "The user is NOT authenticated.";
+
+    private async Task OnShowModalClick()
+    {
+        await modal.ShowAsync();
+    }
+
+    private async Task OnHideModalClick()
+    {
+        await modal.HideAsync();
+    }
+
+    // Logout function to reset authentication
+    private void Logout()
+    {
+        // Reset the auth service
+        AuthService.CurrentUser = new ClaimsPrincipal(); // Reset the user
+        NavigationManager.NavigateTo("/"); // Redirect to the homepage after logout
+    }
 
     [CascadingParameter]
     private Task<AuthenticationState>? authenticationState { get; set; }
@@ -44,5 +75,12 @@
             }
         }
     }
-
 }
+<style>
+    .logout-button-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999; /* Ensure the button stays on top */
+    }
+</style>

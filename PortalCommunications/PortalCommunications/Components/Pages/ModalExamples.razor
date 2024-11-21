@@ -9,24 +9,28 @@
 @inject BlazorBootstrap.ModalService ModalService
 
 <h3>ModalExamples</h3>
-<Button Color="ButtonColor.Primary" @onclick="() => ShowModal(ModalType.Primary)">Show Primary Modal</Button>
-<Button Color="ButtonColor.Secondary" @onclick="() => ShowModal(ModalType.Secondary)">Show Secondary Modal</Button>
-<Button Color="ButtonColor.Success" @onclick="() => ShowModal(ModalType.Success)">Show Success Modal</Button>
-<Button Color="ButtonColor.Danger" @onclick="() => ShowModal(ModalType.Danger)">Show Danger Modal</Button>
-<Button Color="ButtonColor.Warning" @onclick="() => ShowModal(ModalType.Warning)">Show Warning Modal</Button>
-<Button Color="ButtonColor.Info" @onclick="() => ShowModal(ModalType.Info)">Show Info Modal</Button>
-<Button Color="ButtonColor.Light" @onclick="() => ShowModal(ModalType.Light)">Show Light Modal</Button>
-<Button Color="ButtonColor.Dark" @onclick="() => ShowModal(ModalType.Dark)">Show Dark Modal</Button>
-@code {
-    private async Task ShowModal(ModalType modalType)
-    {
-        var modalOption = new ModalOption
-            {
-                Title = "Modal title",
-                Message = "Modal body text goes here.",
-                Type = modalType,
-            };
+<Modal @ref="modal" title="Modal title" UseStaticBackdrop="true" CloseOnEscape="false">
+    <BodyTemplate>
+        I will not close if you click outside me. Don't even try to press escape key.
+    </BodyTemplate>
+    <FooterTemplate>
+        <Button Color="ButtonColor.Secondary" @onclick="OnHideModalClick">Close</Button>
+        <Button Color="ButtonColor.Primary">Understood</Button>
+    </FooterTemplate>
+</Modal>
 
-        await ModalService.ShowAsync(modalOption);
+<Button Color="ButtonColor.Primary" @onclick="OnShowModalClick">Launch static backdrop modal</Button>
+
+@code {
+    private Modal modal = default!;
+
+    private async Task OnShowModalClick()
+    {
+        await modal.ShowAsync();
+    }
+
+    private async Task OnHideModalClick()
+    {
+        await modal.HideAsync();
     }
 }
