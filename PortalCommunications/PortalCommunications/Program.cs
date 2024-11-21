@@ -18,8 +18,6 @@ namespace PortalCommunications
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
 
-
-
             builder.Services.AddCascadingAuthenticationState();
 
             builder.Services.AddServerSideBlazor();
