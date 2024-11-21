@@ -5,6 +5,8 @@ using System.Text.Json;
 using PortalCommunications.Components.Device_Class;
 using PortalCommunications.Components.Pages;
 using Microsoft.AspNetCore.Mvc;
+
+
 namespace APISeperateFiles;
 
 public class APIEndpoints
@@ -90,10 +92,11 @@ public class APIEndpoints
             // This functions will make a new record in "Device Activity" table with new updated details. This "newDeviceObjectWithUpdatedDetails" object contains the update/new details. This function is called whenever a change is made by Home or Portal UI to any of the devices, and this would return a "true" if the changes are made successfully.
             // UpdateChangesInDatabase(Device newDeviceObjectWithUpdatedDetails);
 
+
         });
 
         //This will be used to get a specific device
-        app.MapGet("/api/device/{int Idnumber}", async (int Idnumber) =>
+        app.MapGet("/api/device/{int Idnumber}", async (Idnumber) =>
         {
 /*            //Device deviceData = GetDeviceById(Idnumber);
 
@@ -145,24 +148,37 @@ public class APIEndpoints
             //JSobjectToSend = JsonSerializer.Serialize(device);
             //SendRequestToHome(JSobjectToSend);
 
-
         });
 
         //Create a route that registers devices
         //Expecting a single device within the passed JSON Element.
         app.MapPost("/api/register-device/", async (JsonDocument payload) =>
         {
+            //Extract devicetype from json Document. Json Document is read-only, if write access is needed: change to JsonNode
+            JsonElement root = payload.RootElement;
+            string deviceType = string.Empty;
 
-
+            try
+            {
+                deviceType = root.GetProperty("device-type").ToString();
+            }
+            catch (KeyNotFoundException)
+            {
+                return "device-type not found";
+                throw;
+            }
+            
+            Console.WriteLine("Identified Device type as: " + deviceType);
+            
             //Business Layer Function(Pass RootElement and DeviceType)
 
-            //This function will create a new record in the "DeviceType" table for this new Device. The function will also create a new record in the "Device" table with its specific table. All values for Device Log in this case would be NULL since this function will be creating the device. 
-            //RegisterNewDevice(Device newDevice);
-
+            //Return message
+            return deviceType;
         });
 
 
         ////create a route that registers a new user
+
         app.MapPost("/api/register-user/", async ([FromBody] JsonElement JSobject) =>
         {
 

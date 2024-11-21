@@ -12,6 +12,8 @@ namespace PortalCommunications
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddBlazorBootstrap();
+
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
@@ -19,6 +21,8 @@ namespace PortalCommunications
             builder.Services.AddCascadingAuthenticationState();
 
             builder.Services.AddServerSideBlazor();
+
+            builder.Services.AddScoped<BlazorBootstrap.ModalService>();
 
 
             builder.Services.AddSingleton<CustomAuthenticationService>();
