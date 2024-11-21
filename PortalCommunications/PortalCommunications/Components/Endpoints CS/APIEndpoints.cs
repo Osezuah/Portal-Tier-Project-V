@@ -12,7 +12,7 @@ public class APIEndpoints
     public static void Map(WebApplication app)
     {
         ////route that accepts changes made to devices on Home
-        app.MapPut("/api/device-status/", async ( JsonDocument JSobject) =>
+        app.MapPut("/api/device-status/", async ([FromBody] JsonDocument JSobject) =>
         {
             
     
@@ -114,7 +114,7 @@ public class APIEndpoints
 
         ////Create a route that will authenticate user login credentials - Go to line 33 in Login.razor to chaange the formaction link Thomas
         ///
-        app.MapGet("/api/user", async ( JsonDocument JSobject) =>
+        app.MapGet("/api/user", async ([FromBody] JsonDocument JSobject) =>
         {
 
 /*            User user = JsonSerializer.Deserialize<User>(JSobject.RootElement.GetRawText());
@@ -136,7 +136,7 @@ public class APIEndpoints
         });
 
         ////Create a route that sends changes user makes to device in the ui to home application
-        app.MapPut("/api/device-changes/", async (JsonElement JSobject) =>
+        app.MapPut("/api/device-changes/", async ([FromBody] JsonElement JSobject) =>
         {
 
             //This Function will return an object of type "Device" which is intialized with data from latest record of "Device Activity" table. 
@@ -163,7 +163,7 @@ public class APIEndpoints
 
 
         ////create a route that registers a new user
-        app.MapPost("/api/register-user/", async (JsonElement JSobject) =>
+        app.MapPost("/api/register-user/", async ([FromBody] JsonElement JSobject) =>
         {
 
             //This function will create a new record in the User table in the database using the details from newUser object that is passed as an arguement to this function.
