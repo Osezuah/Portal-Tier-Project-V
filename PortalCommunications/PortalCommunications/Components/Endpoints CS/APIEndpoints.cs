@@ -14,7 +14,7 @@ public class APIEndpoints
     public static void Map(WebApplication app)
     {
         ////route that accepts changes made to devices on Home
-        app.MapPut("/api/device-status/", async ([FromBody] JsonDocument JSobject) =>
+        app.MapGet("/api/device-status/", async ([FromBody] JsonDocument JSobject) =>
         {
             
     
