@@ -3,7 +3,9 @@
 @layout EmptyLayout
 @using Microsoft.AspNetCore.Components.Authorization
 @using PortalCommunications.Components.Services
+@inject ServiceAPI ServiceAPI
 @using System.Security.Claims
+@using PortalCommunications.Components.Device_Class
 @inject CustomAuthenticationService AuthService
 @inject NavigationManager NavigationManager
 
@@ -21,12 +23,12 @@
                     <h3 class="fw-bold mb-4">Welcome to Portal</h3>
 
                     <!-- Login Form -->
-                    <form @onsubmit="SignIn">
+                    <form @onsubmit="HandleLogin">
                         <div class="mb-3">
                             <input @bind="userIdentifier" tabindex="userIdentifier" type="text" class="form-control" id="usernameInput" required placeholder="Enter Username">
                         </div>
                         <div class="mb-3">
-                            <input tabindex="passwordIdentifier" type="password" class="form-control" id="passwordInput" placeholder="Not in Use...">
+                            <input @bind="passwordIdentifier" tabindex="passwordIdentifier" type="password" class="form-control" id="passwordInput" required placeholder="Enter Password">
                         </div>
                         <div class="d-grid mb-3">
                             <button type="submit" class="btn btn-primary">Login</button>
@@ -52,6 +54,27 @@
 
 @code {
     public string userIdentifier = string.Empty;
+    public string passwordIdentifier = string.Empty;
+    public int id = 0;
+    // a public static User variable to store the logged-in user
+    public static User currentUser;
+
+    private async Task HandleLogin()
+    {
+        try
+        {
+            //login with username and password
+            var user = await ServiceAPI.LoginTask(id, userIdentifier, passwordIdentifier);  
+            currentUser = user; //assigns data to currentUser
+            SignIn();//authentication token
+            
+        }
+        catch (Exception ex)
+        {
+            // If an error occurs (e.g., invalid credentials), show an error message
+            string errorMessage = "Login failed: " + ex.Message;
+        }
+    }
     private void SignIn()
     {
         var identity = new ClaimsIdentity(new[]
