@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -7,9 +8,12 @@ using System.Threading.Tasks;
 
 namespace Databases
 {
+    
     // This is the class other groups will use to interface with the Portal Command and Data Layer
     public class PortalCADInterface()
     {
+        SmartHomeContext context = new SmartHomeContext();
+        #region OldParts
         //Interface Hookups for User
         #region User
         public void User_CreateUser(String FirstName, String LastName, String Email, String Password)
@@ -29,7 +33,7 @@ namespace Databases
 
             // If there is a match, return the UserID, else, return -1
             return Result;
- 
+
         }
         #endregion
 
@@ -216,5 +220,68 @@ namespace Databases
         //    return dg1;
         //}
         #endregion
+        #endregion
+
+        // Interfaces with Portal Group
+        public bool UpdateChangesInDatabase(DeviceModel newDeviceObjectWithUpdatedDetails)
+        {
+
+            DeviceModel device = context.devices.Find(newDeviceObjectWithUpdatedDetails.Id);
+            if (device == null)
+            {
+                return false;
+            }
+            device = newDeviceObjectWithUpdatedDetails;
+            return true;
+
+        }
+
+        public DeviceModel GetLatestDeviceActivityRecord()
+        {
+            DeviceModel device = context.devices.Find(); // Needs to be rewritten to search for last activity
+            return device;
+        }
+
+        public bool RegisterNewUser(UserModel newUser)
+        {
+            UserModel user = context.users.Find(newUser.Id);
+            if (user == null)
+            {
+                return false;
+            }
+            user = newUser;
+            context.users.Add(user);
+            return true;
+        }
+
+        public bool RegisterNewDevice(DeviceModel newDevice)
+        {
+            DeviceModel device = context.devices.Find(newDevice.Id);
+            if (device == null)
+            {
+                return false;
+            }
+            device = newDevice;
+            context.devices.Add(device);
+            return true;
+        }
+
+        public bool DoesUserExists(UserModel user)
+        {
+            UserModel usernew = context.users.Find(user.Id);
+            if (usernew == null)
+            {
+                return false;
+            }
+            usernew = user;
+            context.users.Add(usernew);
+            return true;
+        }
+
+        public DeviceModel GetDeviceById(int Idnumber)
+        {
+            DeviceModel device = context.devices.Find(Idnumber);
+            return device;
+        }
     }
 }
