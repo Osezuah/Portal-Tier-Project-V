@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Databases.Models;
 
 namespace Databases
 {
@@ -12,7 +13,7 @@ namespace Databases
     // This is the class other groups will use to interface with the Portal Command and Data Layer
     public class PortalCADInterface()
     {
-        SmartHomeContext context = new SmartHomeContext();
+        PortalDeviceContext context = new PortalDeviceContext();
         #region OldParts
         //Interface Hookups for User
         #region User
@@ -223,10 +224,10 @@ namespace Databases
         #endregion
 
         // Interfaces with Portal Group
-        public bool UpdateChangesInDatabase(DeviceModel newDeviceObjectWithUpdatedDetails)
+        public bool UpdateChangesInDatabase(Device newDeviceObjectWithUpdatedDetails)
         {
 
-            DeviceModel device = context.devices.Find(newDeviceObjectWithUpdatedDetails.Id);
+            Device device = context.devices.Find(newDeviceObjectWithUpdatedDetails.Id);
             if (device == null)
             {
                 return false;
@@ -236,15 +237,15 @@ namespace Databases
 
         }
 
-        public DeviceModel GetLatestDeviceActivityRecord()
+        public Device GetLatestDeviceActivityRecord()
         {
-            DeviceModel device = context.devices.Find(); // Needs to be rewritten to search for last activity
+            Device device = context.devices.Find(); // Needs to be rewritten to search for last activity
             return device;
         }
 
-        public bool RegisterNewUser(UserModel newUser)
+        public bool RegisterNewUser(User newUser)
         {
-            UserModel user = context.users.Find(newUser.Id);
+            User user = context.users.Find(newUser.Id);
             if (user == null)
             {
                 return false;
@@ -254,9 +255,9 @@ namespace Databases
             return true;
         }
 
-        public bool RegisterNewDevice(DeviceModel newDevice)
+        public bool RegisterNewDevice(Device newDevice)
         {
-            DeviceModel device = context.devices.Find(newDevice.Id);
+            Device device = context.devices.Find(newDevice.Id);
             if (device == null)
             {
                 return false;
@@ -266,9 +267,9 @@ namespace Databases
             return true;
         }
 
-        public bool DoesUserExists(UserModel user)
+        public bool DoesUserExists(User user)
         {
-            UserModel usernew = context.users.Find(user.Id);
+            User usernew = context.users.Find(user.Id);
             if (usernew == null)
             {
                 return false;
@@ -278,9 +279,9 @@ namespace Databases
             return true;
         }
 
-        public DeviceModel GetDeviceById(int Idnumber)
+        public Device GetDeviceById(int Idnumber)
         {
-            DeviceModel device = context.devices.Find(Idnumber);
+            Device device = context.devices.Find(Idnumber);
             return device;
         }
     }

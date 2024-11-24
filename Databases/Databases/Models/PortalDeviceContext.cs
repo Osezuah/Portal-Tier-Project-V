@@ -9,6 +9,14 @@ namespace Databases.Models
 {
     public class PortalDeviceContext : DbContext
     {
+        public DbSet<Device> devices { get; set; }
+        public DbSet<DeviceGroup> devicegroups { get; set; }
+        public DbSet<DeviceLog> devicelogs { get; set; }
+        public DbSet<DeviceType> deviceTypes { get; set; }
+        public DbSet<Home> homes { get; set; }
+        public DbSet<Room> rooms { get; set; }
+        public DbSet<User> users { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // relationships
