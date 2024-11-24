@@ -5,7 +5,8 @@ using System.Text.Json;
 using PortalCommunications.Components.Device_Class;
 using PortalCommunications.Components.Pages;
 using Microsoft.AspNetCore.Mvc;
-
+using Databases;
+using Databases.Models;
 
 namespace APISeperateFiles;
 
@@ -98,7 +99,7 @@ public class APIEndpoints
         //This will be used to get a specific device
         app.MapGet("/api/device/{int Idnumber}", async (Idnumber) =>
         {
-/*            //Device deviceData = GetDeviceById(Idnumber);
+            Device deviceData = GetDeviceById(Idnumber);
 
             if (deviceData == null)
             {
@@ -110,8 +111,8 @@ public class APIEndpoints
                 PropertyNameCaseInsensitive = true
             };
 
-            var jsonResponse = JsonSerializer.Serialize(deviceData, options);*/
-            
+            var jsonResponse = JsonSerializer.Serialize(deviceData, options);
+
         });
 
 
@@ -154,10 +155,10 @@ public class APIEndpoints
         {
 
             //This Function will return an object of type "Device" which is intialized with data from latest record of "Device Activity" table. 
-            //Device device = GetLatestDeviceActivityRecord(id);
+            Device device = GetLatestDeviceActivityRecord(id);
 
-            //JSobjectToSend = JsonSerializer.Serialize(device);
-            //SendRequestToHome(JSobjectToSend);
+            JSobjectToSend = JsonSerializer.Serialize(device);
+            SendRequestToHome(JSobjectToSend);
 
         });
 
@@ -192,7 +193,7 @@ public class APIEndpoints
         app.MapPost("/api/register-user", async (User? newUser) =>
         {
             //This function will create a new record in the User table in the database using the details from newUser object that is passed as an arguement to this function.
-            //RegisterNewUser(User newUser);
+            RegisterNewUser(User newUser);
 
             //check if they exist in the database and return User.username
             if (newUser == null)
