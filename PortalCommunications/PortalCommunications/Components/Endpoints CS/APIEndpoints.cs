@@ -124,7 +124,7 @@ public class APIEndpoints
                 return Results.BadRequest(new { Message = "Invalid user data. User cannot be null." });
             }
 
-            //simulated db
+            //simulated getting from db
             bool userExists = true;
             if (userExists){
                 return Results.Ok(new { Id = user.id, Username = user.username, Password = user.password });
@@ -191,12 +191,29 @@ public class APIEndpoints
 
         ////create a route that registers a new user
 
-        app.MapPost("/api/register-user/", async ([FromBody] JsonElement JSobject) =>
+        app.MapPost("/api/register-user", async (User? newUser) =>
         {
-
             //This function will create a new record in the User table in the database using the details from newUser object that is passed as an arguement to this function.
             //RegisterNewUser(User newUser);
 
+            //check if they exist in the database and return User.username
+            if (newUser == null)
+            {
+                return Results.BadRequest(new { Message = "Invalid user data. User cannot be null." });
+            }
+            else
+            {
+                //save to db
+                bool isSaved = true;
+                if (isSaved)
+                {
+                    return Results.Ok(new { Id = newUser.id, Username = newUser.username, Password = newUser.password });
+                }
+                else
+                {
+                    return Results.NotFound(new { Message = "User not found in the database" });
+                }
+            }        
         });
     }
 }
