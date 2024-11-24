@@ -116,7 +116,6 @@ public class APIEndpoints
 
 
         ////Create a route that will authenticate user login credentials - Go to line 33 in Login.razor to chaange the formaction link Thomas
-        ///
         app.MapPost("/api/user", async (User? user) =>
         {
             //check if they exist in the database and return User.username
@@ -132,22 +131,22 @@ public class APIEndpoints
             else{
                 return Results.NotFound(new { Message = "User not found in the database" });
             }
-/*            User user = JsonSerializer.Deserialize<User>(JSobject.RootElement.GetRawText());
+           
+            /*            User user = JsonSerializer.Deserialize<User>(JSobject.RootElement.GetRawText());
 
-            
-            var json = @"
-            {
-                ""message"": ""User Authenticated""
-            }";
 
-            var jsonDocumenttosend = JsonDocument.Parse(json);
-            //This function will check if a user exists in the database and return a "true" or "false". The user object passed to the function contains username, password and email. (See the User class)
-            if (DoesUserExists(user))
-            {
-                SendRequestToHome(jsonDocumenttosend);
-            }
-*/
+                        var json = @"
+                        {
+                            ""message"": ""User Authenticated""
+                        }";
 
+                        var jsonDocumenttosend = JsonDocument.Parse(json);
+                        //This function will check if a user exists in the database and return a "true" or "false". The user object passed to the function contains username, password and email. (See the User class)
+                        if (DoesUserExists(user))
+                        {
+                            SendRequestToHome(jsonDocumenttosend);
+                        }
+            */
         });
 
         ////Create a route that sends changes user makes to device in the ui to home application
@@ -190,7 +189,6 @@ public class APIEndpoints
 
 
         ////create a route that registers a new user
-
         app.MapPost("/api/register-user", async (User? newUser) =>
         {
             //This function will create a new record in the User table in the database using the details from newUser object that is passed as an arguement to this function.
