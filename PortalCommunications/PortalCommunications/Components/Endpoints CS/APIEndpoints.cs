@@ -117,9 +117,21 @@ public class APIEndpoints
 
         ////Create a route that will authenticate user login credentials - Go to line 33 in Login.razor to chaange the formaction link Thomas
         ///
-        app.MapGet("/api/user", async ([FromBody] JsonDocument JSobject) =>
+        app.MapPost("/api/user", async (User? user) =>
         {
+            //check if they exist in the database and return User.username
+            if(user == null) {
+                return Results.BadRequest(new { Message = "Invalid user data. User cannot be null." });
+            }
 
+            //simulated getting from db
+            bool userExists = true;
+            if (userExists){
+                return Results.Ok(new { Id = user.id, Username = user.username, Password = user.password });
+            }
+            else{
+                return Results.NotFound(new { Message = "User not found in the database" });
+            }
 /*            User user = JsonSerializer.Deserialize<User>(JSobject.RootElement.GetRawText());
 
             
@@ -179,12 +191,29 @@ public class APIEndpoints
 
         ////create a route that registers a new user
 
-        app.MapPost("/api/register-user/", async ([FromBody] JsonElement JSobject) =>
+        app.MapPost("/api/register-user", async (User? newUser) =>
         {
-
             //This function will create a new record in the User table in the database using the details from newUser object that is passed as an arguement to this function.
             //RegisterNewUser(User newUser);
 
+            //check if they exist in the database and return User.username
+            if (newUser == null)
+            {
+                return Results.BadRequest(new { Message = "Invalid user data. User cannot be null." });
+            }
+            else
+            {
+                //save to db
+                bool isSaved = true;
+                if (isSaved)
+                {
+                    return Results.Ok(new { Id = newUser.id, Username = newUser.username, Password = newUser.password });
+                }
+                else
+                {
+                    return Results.NotFound(new { Message = "User not found in the database" });
+                }
+            }        
         });
     }
 }

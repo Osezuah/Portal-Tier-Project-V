@@ -1,6 +1,9 @@
 ﻿@page "/account"
 @inject PortalCommunications.Components.Services.AccountService AccountService
+@using PortalCommunications.Components.Device_Class
 @inject NavigationManager NavigationManager
+<!-- this includes api async functions-->
+@inject ServiceAPI ServiceAPI 
 
 <PageTitle>My Account</PageTitle>
 
@@ -23,17 +26,26 @@
     </div>
 </div>
 
-<!--Username and Password Display-->
-<div>
-    <p class="des"> Username:</p>
-    <h4 class="dataBorder">Username</h4>
-    <p class="des">Password:</p>
-    <h4 class="dataBorder">Password</h4>
-</div>
+<!--Username Display-->
+@if(Login.currentUser == null){
+    <div class="container text-center">
+        <h4 style="font-style:italic; padding-top:50px">Loading ...</h4>
+    </div>
+}
+else
+{
+    <div>
+        <p class="des"> Username:</p>
+        <h4 class="dataBorder">@Login.currentUser.username</h4> @*display username on screen*@
+        @* <p class="des">Password:</p>
+    <h4 class="dataBorder">Password</h4> *@
+    </div>
+}
+
 
 <!--Edit and Delete Account Links-->
 <div class="container">
-    <a href="#" class="editacc"> Edit Account</a>
+    <a class="editacc"> Edit Account</a>
     <a class="delacc" @onclick="ShowConfirmation" >Delete Account</a>
 </div>
 

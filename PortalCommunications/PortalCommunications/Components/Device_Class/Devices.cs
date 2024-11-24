@@ -314,16 +314,9 @@
         public int id { get; set; } // Primary key
         public string username { get; set; }
         public string password { get; set; }
-        public string email { get; set; }
+       // removed email
 
-        // Parameterized constructor
-        public User(int Id, string Username, string Password, string Email)
-        {
-            id = Id;
-            username = Username;
-            password = Password;
-            email = Email;
-        }
+        //removed the constructor
     }
 
 

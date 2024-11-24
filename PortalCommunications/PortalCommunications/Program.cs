@@ -33,6 +33,13 @@ namespace PortalCommunications
             // Register HttpClient as a service for AccountService
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7197/") });
 
+            builder.Services.AddScoped<ServiceAPI>();  // ServiceAPI is a service
+
+            // Adding HttpClient (for making HTTP requests from ServiceAPI)
+            builder.Services.AddHttpClient<ServiceAPI>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7197/"); // Replace with your API base URL
+            });
 
             // Register AccountService as a scoped service
             builder.Services.AddScoped<AccountService>();
