@@ -1,0 +1,78 @@
+﻿@page "/all-devices"
+@rendermode InteractiveServer
+
+
+<PageTitle>All Devices</PageTitle>
+
+<div class="main-content">
+    <div class="header">
+        <div class="logo-container">
+            <img src="images/portal logo.png" alt="Portal Logo" class="portal-logo">
+        </div>
+    </div>
+
+    <h1>All Devices</h1>
+
+    <p>Here you can manage all your smart devices.</p>
+
+    <!-- Device Management Section -->
+    <div class="device-list">
+        <!-- Smart Fridge -->
+        <div class="device-item">
+            <span class="device-name">Smart Fridge</span>
+            <span class="device-location">Kitchen</span>
+            <label class="switch">
+                <input type="checkbox" checked />
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <!-- Smart Toaster -->
+        <div class="device-item">
+            <span class="device-name">Smart Toaster</span>
+            <span class="device-location">Kitchen</span>
+            <label class="switch">
+                <input type="checkbox" />
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <!-- Smart Security System with Dropdown -->
+        <div class="device-item">
+            <span class="device-name">Smart Security System</span>
+            <span class="device-location">Security</span>
+            <img src="images/dropdown icon.jpg" alt="Dropdown Icon" class="dropdown-icon" @onclick="ToggleDropdown" style="cursor: pointer;" />
+        </div>
+
+        <!-- Sub-device (Dropdown content) -->
+        <div class="dropdown-content @(isDropdownOpen ? "show" : "")">
+            <div class="sub-device">
+                <span class="sub-device-name">Security Camera</span>
+                <label class="switch">
+                    <input type="checkbox" checked />
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Smart Coffee Maker -->
+        <div class="device-item">
+            <span class="device-name">Smart Coffee Maker</span>
+            <span class="device-location">Kitchen</span>
+            <label class="switch">
+                <input type="checkbox" />
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool isDropdownOpen = false;
+
+    private void ToggleDropdown()
+    {
+        isDropdownOpen = !isDropdownOpen;
+    }
+}
+
