@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Databases.Models
+namespace PortalCommunications.Models
 {
     public class PortalDeviceContext : DbContext
     {
@@ -16,6 +16,10 @@ namespace Databases.Models
         public DbSet<Home> homes { get; set; }
         public DbSet<Room> rooms { get; set; }
         public DbSet<User> users { get; set; }
+
+        public PortalDeviceContext(DbContextOptions<PortalDeviceContext> options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,13 +43,13 @@ namespace Databases.Models
                 .WithOne(Device => Device.ParentRoom)
                 .HasForeignKey("RoomId")
                 .IsRequired(false);
-            
+
             modelBuilder.Entity<DeviceGroup>()
                 .HasMany<Device>(Room => Room.Devices)
                 .WithOne(Device => Device.ParentGroup)
                 .HasForeignKey("GroupId")
                 .IsRequired(false);
-            
+
             modelBuilder.Entity<DeviceType>()
                 .HasMany<Device>(DeviceType => DeviceType.Devices)
                 .WithOne(Device => Device.ParentType)

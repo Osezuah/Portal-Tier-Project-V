@@ -1,8 +1,10 @@
 using APISeperateFiles;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.EntityFrameworkCore;
 using PortalCommunications.Components;
 using PortalCommunications.Components.Authorization;
 using PortalCommunications.Components.Services;
+using PortalCommunications.Models;
 
 namespace PortalCommunications
 {
@@ -17,6 +19,10 @@ namespace PortalCommunications
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
+            builder.Services.AddDbContext<PortalDeviceContext>(options =>
+            {
+                options.UseSqlite(builder.Configuration.GetConnectionString("Sqlite"));
+            });
 
             builder.Services.AddCascadingAuthenticationState();
 

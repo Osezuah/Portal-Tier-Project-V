@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,17 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Databases.Models
+namespace PortalCommunications.Models
 {
-    public class DeviceType : PortalDeviceContext
+    public class Home
     {
         [Required]
         [Key]
         public int Id { get; set; }
-        
+
         [Required]
         public string Name { get; set; }
-        
-        public ICollection<Device> Devices { get; set; }
+
+        [Required]
+        public int UserId { get; set; }
+
+        public User User { get; set; }
+        public ICollection<Room> Rooms { get; set; } = new List<Room>();
     }
 }

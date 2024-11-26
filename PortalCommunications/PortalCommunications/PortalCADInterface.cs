@@ -5,15 +5,15 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Databases.Models;
+using PortalCommunications.Models;
 
-namespace Databases
+namespace PortalCommunications
 {
-    
+
     // This is the class other groups will use to interface with the Portal Command and Data Layer
     public class PortalCADInterface()
     {
-        PortalDeviceContext context = new PortalDeviceContext();
+        PortalDeviceContext context;
         #region OldParts
         //Interface Hookups for User
         #region User
