@@ -1,78 +1,143 @@
 ﻿@page "/all-devices"
-@rendermode InteractiveServer
-
+@inject HttpClient Http
 
 <PageTitle>All Devices</PageTitle>
 
-<div class="main-content">
-    <div class="header">
-        <div class="logo-container">
-            <img src="images/portal logo.png" alt="Portal Logo" class="portal-logo">
-        </div>
-    </div>
+<div class="container text-center">
+    <img src="images/portal logo.png" alt="Portal Logo" style="width: 150px;">
+    <h3 class="display-5">
+        All Devices
+    </h3>
+    <small class="text-body-secondary">Manage and monitor all your smart devices here.</small>
+</div>
 
-    <h1>All Devices</h1>
-
-    <p>Here you can manage all your smart devices.</p>
-
-    <!-- Device Management Section -->
-    <div class="device-list">
-        <!-- Smart Fridge -->
-        <div class="device-item">
-            <span class="device-name">Smart Fridge</span>
-            <span class="device-location">Kitchen</span>
-            <label class="switch">
-                <input type="checkbox" checked />
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <!-- Smart Toaster -->
-        <div class="device-item">
-            <span class="device-name">Smart Toaster</span>
-            <span class="device-location">Kitchen</span>
-            <label class="switch">
-                <input type="checkbox" />
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <!-- Smart Security System with Dropdown -->
-        <div class="device-item">
-            <span class="device-name">Smart Security System</span>
-            <span class="device-location">Security</span>
-            <img src="images/dropdown icon.jpg" alt="Dropdown Icon" class="dropdown-icon" @onclick="ToggleDropdown" style="cursor: pointer;" />
-        </div>
-
-        <!-- Sub-device (Dropdown content) -->
-        <div class="dropdown-content @(isDropdownOpen ? "show" : "")">
-            <div class="sub-device">
-                <span class="sub-device-name">Security Camera</span>
-                <label class="switch">
-                    <input type="checkbox" checked />
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
-
-        <!-- Smart Coffee Maker -->
-        <div class="device-item">
-            <span class="device-name">Smart Coffee Maker</span>
-            <span class="device-location">Kitchen</span>
-            <label class="switch">
-                <input type="checkbox" />
-                <span class="slider"></span>
-            </label>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="card-body">
+            @if (isLoading)
+            {
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            }
+            else if (DeviceList?.Any() == true)
+            {
+                <table class="table table-striped table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Device(s)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var device in DeviceList)
+                        {
+                            <tr>
+                                <td>@device.Name</td>
+                                <td>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="device-@device.Id" checked="@(device.State == "On")" @onchange="() => ToggleDeviceStateAsync(device)" />
+                                        <label class="form-check-label" for="device-@device.Id">
+                                            @(device.State)
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-info text-center" role="alert">
+                    No devices connected.
+                </div>
+            }
         </div>
     </div>
 </div>
 
 @code {
-    private bool isDropdownOpen = false;
+    private List<DeviceModel> DeviceList = new();
+    private bool isLoading = false;
 
-    private void ToggleDropdown()
+    protected override async Task OnInitializedAsync()
     {
-        isDropdownOpen = !isDropdownOpen;
+        isLoading = true;
+        try
+        {
+            await LoadDevicesAsync();
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    // Fetch devices using the actual API
+    private async Task LoadDevicesAsync()
+    {
+        try
+        {
+            // Fetch the device IDs dynamically from the API
+            var deviceIds = await Http.GetFromJsonAsync<List<int>>("/api/device-status/");
+            if (deviceIds == null || !deviceIds.Any())
+            {
+                Console.WriteLine("No devices found.");
+                return;
+            }
+
+            DeviceList.Clear();
+
+            foreach (var id in deviceIds)
+            {
+                var device = await Http.GetFromJsonAsync<DeviceModel>($"/api/device/{id}");
+                if (device != null)
+                {
+                    DeviceList.Add(device);
+                }
+            }
+
+            Console.WriteLine($"Successfully loaded {DeviceList.Count} devices.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading devices: {ex.Message}");
+        }
+    }
+
+    // Toggle device state and update using API
+    private async Task ToggleDeviceStateAsync(DeviceModel device)
+    {
+        try
+        {
+            // Toggle the device state
+            device.State = device.State == "On" ? "Off" : "On";
+            device.LastUpdated = DateTime.UtcNow;
+
+            // Send the updated state to the API
+            var response = await Http.PutAsJsonAsync("/api/device-changes/", device);
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"Device {device.Name} updated successfully.");
+            }
+            else
+            {
+                Console.WriteLine($"Error updating device {device.Name}: {response.StatusCode}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error toggling device state: {ex.Message}");
+        }
+    }
+
+    // Device model
+    public class DeviceModel
+    {
+        public int Id { get; set; } // Device ID
+        public string Name { get; set; } = string.Empty; // Device Name
+        public string State { get; set; } = "Off"; // Device State (e.g., "On" or "Off")
+        public DateTime LastUpdated { get; set; } // Last updated timestamp
     }
 }
-
