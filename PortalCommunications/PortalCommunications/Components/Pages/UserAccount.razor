@@ -1,0 +1,107 @@
+﻿@page "/account"
+@inject PortalCommunications.Components.Services.AccountService AccountService
+@using PortalCommunications.Components.Device_Class
+@inject NavigationManager NavigationManager
+<!-- this includes api async functions-->
+@inject ServiceAPI ServiceAPI 
+
+<PageTitle>My Account</PageTitle>
+
+<!--Portal logo-->
+<div class="container text-center">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div>
+                <img style="width:90px" src="../images/portal logo.png" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--My account heading and logo-->
+<div class="container text-center">
+    <div>
+        <img style="width:115px" class="headerStyling" src="../images/account image.png" />
+        <h1 class="fw-bold headerStyling" style="font-size:50px">My Account</h1>
+    </div>
+</div>
+
+<!--Username Display-->
+@if(Login.currentUser == null){
+    <div class="container text-center">
+        <h4 style="font-style:italic; padding-top:50px">Loading ...</h4>
+    </div>
+}
+else
+{
+    <div>
+        <p class="des"> Username:</p>
+        <h4 class="dataBorder">@Login.currentUser.username</h4> @*display username on screen*@
+        @* <p class="des">Password:</p>
+    <h4 class="dataBorder">Password</h4> *@
+    </div>
+}
+
+
+<!--Edit and Delete Account Links-->
+<div class="container">
+    <a class="editacc"> Edit Account</a>
+    <a class="delacc" @onclick="ShowConfirmation" >Delete Account</a>
+</div>
+
+<!-- Success Message -->
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert mt-3 @(isDeletionSuccessful ? "alert-success" : "alert-danger")">
+        @successMessage
+    </div>
+}
+
+
+<!-- Confirmation Popup -->
+@if (showConfirmation)
+{
+    <div class="confirmation-overlay">
+        <div class="confirmation-box">
+            <p>Are you sure you want to delete your account?</p>
+            <button class="btn btn-danger" @onclick="ConfirmDelete">Yes</button>
+            <button class="btn btn-secondary" @onclick="CancelDelete">No</button>
+        </div>
+    </div>
+}
+
+@code {
+    private bool showConfirmation = false;
+    private int userId = 1; // For testing
+    private string successMessage = string.Empty; // Variable to hold the success message
+    private bool isDeletionSuccessful = true; // Variable to control message color based on success or failure
+
+    private void ShowConfirmation()
+    {
+        showConfirmation = true;
+    }
+
+    private async Task ConfirmDelete()
+    {
+        showConfirmation = false;
+        bool isDeleted = await AccountService.DeleteAccountAsync(userId);
+
+        if (isDeleted)
+        {
+            successMessage = "Account successfully deleted.";
+            isDeletionSuccessful = true;
+            await Task.Delay(2000); // Wait for 2 seconds before redirecting
+            NavigationManager.NavigateTo("/login");
+        }
+        else
+        {
+            successMessage = "Failed to delete account.";
+            isDeletionSuccessful = false;
+        }
+    }
+
+    private void CancelDelete()
+    {
+        showConfirmation = false;
+    }
+}
