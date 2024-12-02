@@ -12,141 +12,221 @@ namespace APISeperateFiles;
 
 public class APIEndpoints
 {
-    PortalCommunications.PortalCADInterface interface_object = new PortalCADInterface();
-    private readonly PortalDeviceContext portalDeviceContext;
+    //private readonly PortalDeviceContext portalDeviceContext;
+    PortalCommunications.PortalCADInterface interface_object;
 
-    public APIEndpoints(PortalDeviceContext portalDeviceContext)
-    {
-        this.portalDeviceContext = portalDeviceContext;
-    }
+
+
+        public APIEndpoints(PortalCADInterface interfaceObject)
+        {
+            interface_object = interfaceObject;
+        }
+
+
     public static void Map(WebApplication app)
     {
         ////route that accepts changes made to devices on Home
-        /*        app.MapPut("/api/device-status/", async ([FromBody] JsonDocument JSobject) =>
+               app.MapPut("/api/device-status/", async (PortalCommunications.Device newDevice, PortalCADInterface interface_object) =>
                 {
-
-
-                    string device_name = JSobject.RootElement.GetProperty("name").ToString();
-
-                    var options = new JsonSerializerOptions
+                    
+                    if (newDevice == null)
                     {
-                        PropertyNameCaseInsensitive = true // This ensures case-insensitive matching
-                    };
+                        return Results.BadRequest(new { message = "Invalid data!"});
+                    }
+                    string device_name = newDevice.Name;
+
+                    /*                    var options = new JsonSerializerOptions
+                                        {
+                                            PropertyNameCaseInsensitive = true // This ensures case-insensitive matching
+                                        };*/
+                    PortalCommunications.DeviceLog deviceLog = newDevice.Logs.ElementAtOrDefault(0);
 
                     if (device_name.Contains("Lock"))
                     {
-                        Lock lock_ = JsonSerializer.Deserialize<Lock>(JSobject.RootElement.GetRawText());
+                        //Hardcoding some values becuase of incompatibility of both device classes
+                        Lock lock_ = new Lock(newDevice.Id, newDevice.Name, true, newDevice.LastUpdated, 1, deviceLog.LoggedState);
                         if (lock_.Validate())
                         {
-                            PortalCommunications.Components.Device_Class.Device device = JsonSerializer.Deserialize<PortalCommunications.Components.Device_Class.Device>(JSobject.RootElement.GetRawText());
-
-                            PortalCommunications.PortalCADInterface.UpdateChangesInDatabase(device);
-
+                            if (interface_object.UpdateChangesInDatabase(newDevice)){
+                                return Results.BadRequest(new { message = "Device Information Updated Successfully!" });
+                            }
+                            else
+                            {
+                                return Results.BadRequest(new { message = "Device Information could not be Updated!" });
+                            }
+                        }
+                        else
+                        {
+                            return Results.BadRequest(new { message = "Invalid data!" });
                         }
 
                     }
                     else if(device_name.Contains("Sensor"))
                     {
-                        Sensors sensor = JsonSerializer.Deserialize<Sensors>(JSobject.RootElement.GetRawText());
+                        Sensors sensor = new Sensors(newDevice.Id, newDevice.Name, true, newDevice.LastUpdated, 1, deviceLog.LoggedState);
                         if (sensor.Validate())
                         {
-                            PortalCommunications.Components.Device_Class.Device device = JsonSerializer.Deserialize<PortalCommunications.Components.Device_Class.Device>(JSobject.RootElement.GetRawText());
-                            PortalCommunications.PortalCADInterface.UpdateChangesInDatabase(device);
+                            if (interface_object.UpdateChangesInDatabase(newDevice))
+                            {
+                                return Results.BadRequest(new { message = "Device Information Updated Successfully!" });
+                            }
+                            else
+                            {
+                                return Results.BadRequest(new { message = "Device Information could not be Updated!" });
+                            }
+                        }
+                        else
+                        {
+                            return Results.BadRequest(new { message = "Invalid data!" });
                         }
                     }
                     else if (device_name.Contains("Camera"))
                     {
-                        PortalCommunications.Device device = JsonSerializer.Deserialize<PortalCommunications.Device>(JSobject.RootElement.GetRawText());
-                        PortalCommunications.PortalCADInterface.UpdateChangesInDatabase(device);
+                        //didn't have validation for this class, therefore directly passing this to database for update
+                        if (interface_object.UpdateChangesInDatabase(newDevice))
+                        {
+                            return Results.BadRequest(new { message = "Device Information Updated Successfully!" });
+                        }
+                        else
+                        {
+                            return Results.BadRequest(new { message = "Device Information could not be Updated!" });
+                        }
+                        
                     }
                     else if (device_name.Contains("Alarm"))
                     {
-                        Alarm alarm = JsonSerializer.Deserialize<Alarm>(JSobject.RootElement.GetRawText());
+                        Alarm alarm = new Alarm(newDevice.Id, newDevice.Name, true, newDevice.LastUpdated, 1, deviceLog.LoggedState);
                         if (alarm.Validate())
                         {
-                            PortalCommunications.Components.Device_Class.Device device = JsonSerializer.Deserialize<PortalCommunications.Components.Device_Class.Device>(JSobject.RootElement.GetRawText());
-                            PortalCommunications.PortalCADInterface.UpdateChangesInDatabase(device);
+                            if (interface_object.UpdateChangesInDatabase(newDevice))
+                            {
+                                return Results.BadRequest(new { message = "Device Information Updated Successfully!" });
+                            }
+                            else
+                            {
+                                return Results.BadRequest(new { message = "Device Information could not be Updated!" });
+                            }
+                        }
+                        else
+                        {
+                            return Results.BadRequest(new { message = "Invalid data!" });
                         }
                     }
                     else if (device_name.Contains("Tracker"))
                     {
-                        Tracker tracker = JsonSerializer.Deserialize<Tracker>(JSobject.RootElement.GetRawText());
+                        Tracker tracker = new Tracker(newDevice.Id, newDevice.Name, true, newDevice.LastUpdated, 1, deviceLog.LoggedState);
                         if (tracker.Validate())
                         {
-                            PortalCommunications.Components.Device_Class.Device device = JsonSerializer.Deserialize<PortalCommunications.Components.Device_Class.Device>(JSobject.RootElement.GetRawText());
-                            PortalCommunications.PortalCADInterface.UpdateChangesInDatabase(device);
+                            if (interface_object.UpdateChangesInDatabase(newDevice))
+                            {
+                                return Results.BadRequest(new { message = "Device Information Updated Successfully!" });
+                            }
+                            else
+                            {
+                                return Results.BadRequest(new { message = "Device Information could not be Updated!" });
+                            }
+                        }
+                        else
+                        {
+                            return Results.BadRequest(new { message = "Invalid data!" });
                         }
                     }
                     else if (device_name.Contains("Fridge"))
                     {
-                        SmartFridge smartFridge = JsonSerializer.Deserialize<SmartFridge>(JSobject.RootElement.GetRawText());
+                        SmartFridge smartFridge = new SmartFridge(newDevice.Id, newDevice.Name, true, newDevice.LastUpdated, 1, deviceLog.LoggedState);
                         if (smartFridge.Validate())
                         {
-                            PortalCommunications.Components.Device_Class.Device device = JsonSerializer.Deserialize<PortalCommunications.Components.Device_Class.Device>(JSobject.RootElement.GetRawText());
-                            PortalCommunications.PortalCADInterface.UpdateChangesInDatabase(device);
+                            if (interface_object.UpdateChangesInDatabase(newDevice))
+                            {
+                                return Results.BadRequest(new { message = "Device Information Updated Successfully!" });
+                            }
+                            else
+                            {
+                                return Results.BadRequest(new { message = "Device Information could not be Updated!" });
+                            }
+                        }
+                        else
+                        {
+                            return Results.BadRequest(new { message = "Invalid data!" });
                         }
                     }
                     else if (device_name.Contains("Dehumidifier"))
                     {
-                        PortalCommunications.Components.Device_Class.Device device = JsonSerializer.Deserialize<PortalCommunications.Components.Device_Class.Device>(JSobject.RootElement.GetRawText());
-                        PortalCommunications.PortalCADInterface.UpdateChangesInDatabase(device);
+                        //didn't have validation for this class, therefore directly passing this to database for update
+                        if (interface_object.UpdateChangesInDatabase(newDevice))
+                        {
+                            return Results.BadRequest(new { message = "Device Information Updated Successfully!" });
+                        }
+                        else
+                        {
+                            return Results.BadRequest(new { message = "Device Information could not be Updated!" });
+                        }
                     }
                     else if (device_name.Contains("Thermostat"))
                     {
-                        PortalCommunications.Components.Device_Class.Device device = JsonSerializer.Deserialize<PortalCommunications.Components.Device_Class.Device>(JSobject.RootElement.GetRawText());
-                        PortalCommunications.PortalCADInterface.UpdateChangesInDatabase(device);
+                        //didn't have validation for this class, therefore directly passing this to database for update
+                        if (interface_object.UpdateChangesInDatabase(newDevice))
+                        {
+                            return Results.BadRequest(new { message = "Device Information Updated Successfully!" });
+                        }
+                        else
+                        {
+                            return Results.BadRequest(new { message = "Device Information could not be Updated!" });
+                        }
                     }
 
 
                     // This functions will make a new record in "Device Activity" table with new updated details. This "newDeviceObjectWithUpdatedDetails" object contains the update/new details. This function is called whenever a change is made by Home or Portal UI to any of the devices, and this would return a "true" if the changes are made successfully.
                     // UpdateChangesInDatabase(Device newDeviceObjectWithUpdatedDetails);
 
-
-                });*/
-
-        /*        //This will be used to get a specific device
-                app.MapGet("/api/device/{Idnumber}", async (int Idnumber) =>
-                {
-                    PortalCommunications.PortalCADInterface interface_object = new PortalCADInterface();
-                    PortalCommunications.Device deviceData = interface_object.GetDeviceById(Idnumber);
-
-                    if (deviceData == null)
-                    {
-                        return Results.NotFound();
-                    }
-
-                    var options = new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    };
-
-                    var jsonResponse = JsonSerializer.Serialize(deviceData, options);
-                    return Results.Json(deviceData);
+                    return Results.BadRequest(new { message = "Device Information Updated Successfully!" });
                 });
 
+            //This will be used to get a specific device
+            app.MapGet("/api/device/{Idnumber}", async (int Idnumber, PortalCADInterface interface_object) =>
+            {
+                    
+                PortalCommunications.Device device = interface_object.GetDeviceById(Idnumber);
 
-                ////Create a route that will authenticate user login credentials - Go to line 33 in Login.razor to chaange the formaction link Thomas
-                app.MapPost("/api/user", async ([FromBody] JsonDocument JSobject) =>
+                if (device == null)
                 {
+                    return Results.NotFound(new { Message = "Device with this Id not found in database!" });
+                }
 
-                    PortalCommunications.Components.Device_Class.User user = JsonSerializer.Deserialize<PortalCommunications.Components.Device_Class.User>(JSobject.RootElement.GetRawText());
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                var jsonResponse = JsonSerializer.Serialize(device, options);
+                return Results.Json(device);
+            });
+        
+
+        ////Create a route that will authenticate user login credentials - Go to line 33 in Login.razor to chaange the formaction link Thomas
+        //app.MapPost("/api/user", async ([FromBody] JsonDocument JSobject) =>
+        app.MapPost("/api/user", async (PortalCommunications.Models.User newUser, [FromServices] PortalCADInterface interface_object) =>
+        {
+
+                    //PortalCommunications.Components.Device_Class.User user = JsonSerializer.Deserialize<PortalCommunications.Components.Device_Class.User>(JSobject.RootElement.GetRawText());
 
                     //check if they exist in the database and return User.username
-                    if (user == null) {
-                        return Results.BadRequest(new { Message = "Invalid user data. User cannot be null." });
+                    if (newUser == null) {
+                        return Results.BadRequest(new { Message = "Invalid user data." });
                     }
 
-                    if (PortalCommunications.PortalCADInterface.DoesUserExists(user){
-                        return Results.Ok(new { Id = user.id, Username = user.username, Password = user.password });
+                    if (interface_object.RegisterNewUser(newUser)){ //just changed it to register the user to database
+                        //return Results.Ok(new { Id = user.id, Username = user.username, Password = user.password });
+                        return Results.Ok(new { Message = "User Authenticated!" });
                     }
                     else{
                         return Results.NotFound(new { Message = "User not found in the database" });
                     }
 
                 });
-
-                ////Create a route that sends changes user makes to device in the ui to home application
-                app.MapPut("/api/device-changes/", async ([FromBody] JsonElement JSobject) =>
+        
+        ////Create a route that sends changes user makes to device in the ui to home application
+        app.MapPut("/api/device-changes/", async ([FromBody] JsonElement JSobject) =>
                 {
 
 
@@ -157,66 +237,53 @@ public class APIEndpoints
                     //SendRequestToHome(JSobjectToSend);
 
                 });
-
-                //Create a route that registers devices
-                //Expecting a single device within the passed JSON Element.
-                app.MapPost("/api/register-device/", async (JsonDocument payload) =>
+        
+        //Create a route that registers devices
+        //Expecting a single device within the passed JSON Element.
+        //app.MapPost("/api/register-device/", async (JsonDocument payload, PortalCADInterface interface_object) =>
+                app.MapPost("/api/register-device/", async (PortalCommunications.Device newDevice, PortalCADInterface interface_object) =>
                 {
-                    //Extract devicetype from json Document. Json Document is read-only, if write access is needed: change to JsonNode
-                    JsonElement root = payload.RootElement;
-                    string deviceType = string.Empty;
-                    PortalCommunications.Components.Device_Class.Device deviceinfo;
 
 
-                    try
+                    if (interface_object.RegisterNewDevice(newDevice))
                     {
-                        deviceType = root.GetProperty("device-type").ToString();
-
+                        //Return message
+                        return Results.Ok(new { message = "Device Successfully Registered!" });
                     }
-                    catch (KeyNotFoundException)
+                    else
                     {
-                        return "device-type not found";
-                        throw;
+                        return Results.Ok(new { message = "Device Registration not successful!" });
                     }
-
-                    Console.WriteLine("Identified Device type as: " + deviceType);
-
-                    //Business Layer Function(Pass RootElement and DeviceType)
-                    deviceinfo = JsonSerializer.Deserialize<PortalCommunications.Components.Device_Class.Device>(payload.RootElement.GetRawText());
-                    PortalCommunications.PortalCADInterface.RegisterNewDevice(deviceinfo);
-                    //Return message
-                    return deviceType;
                 });
 
-
-                ////create a route that registers a new user
-                app.MapPost("/api/register-user", async (PortalCommunications.Components.Device_Class.User newUser) =>
+        ////create a route that registers a new user
+        // app.MapPost("/api/register-user", async (PortalCommunications.Components.Device_Class.User newUser) =>
+        app.MapPost("/api/register-user", async (PortalCommunications.Models.User newUser, PortalCADInterface interface_object) =>
                 {
-                    //This function will create a new record in the User table in the database using the details from newUser object that is passed as an arguement to this function.
-                    PortalCommunications.PortalCADInterface.RegisterNewUser(newUser);
 
                     //check if they exist in the database and return User.username
                     if (newUser == null)
                     {
                         return Results.BadRequest(new { Message = "Invalid user data. User cannot be null." });
                     }
+                    
+                    //This function will create a new record in the User table in the database using the details from newUser object that is passed as an arguement to this function.
+                    bool isSaved = interface_object.RegisterNewUser(newUser);
+                    //bool isSaved = true;
+                    if (isSaved)
+                    {
+                        //return Results.Ok(new { id = newUser.Id, firstname = newUser.FirstName, lastname = newUser.LastName, email = newUser.Email, password = newUser.Password });
+                        return Results.Ok(new { message = "User Successfully Registered!" });
+                    }
                     else
                     {
-                        //save to db
-                        bool isSaved = true;
-                        if (isSaved)
-                        {
-                            return Results.Ok(new { Id = newUser.id, Username = newUser.username, Password = newUser.password });
-                        }
-                        else
-                        {
-                            return Results.NotFound(new { Message = "User not found in the database" });
-                        }
+                        return Results.NotFound(new { Message = "User Already Exists!" });
                     }
-                });*/
+
+                });
 
 
-
+        //ENDPOINT MADE FOR TESTING
     app.MapGet("/api/devices", async (PortalDeviceContext db) =>
         {
             var devices = db.devices.ToList();

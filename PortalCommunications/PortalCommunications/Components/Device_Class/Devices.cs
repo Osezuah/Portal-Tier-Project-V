@@ -8,7 +8,7 @@
         public int deviceId { get; set; } // FK
 
         //this is the main data which have the csv value of the device details and we have to extract it from here and perform the validaitron for each of teh resp. class
-        public string loggedMessage { get; set; }
+        public string loggedMessage { get; set; } = null!;
 
         // time of when log was created
         public DateTime loggedTime { get; set; }
@@ -312,8 +312,8 @@
     public class User
     {
         public int id { get; set; } // Primary key
-        public string username { get; set; }
-        public string password { get; set; }
+        public string username { get; set; } = string.Empty;
+        public string password { get; set; } = string.Empty;
        // removed email
 
         //removed the constructor

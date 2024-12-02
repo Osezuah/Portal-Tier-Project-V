@@ -11,9 +11,16 @@ namespace PortalCommunications
 {
 
     // This is the class other groups will use to interface with the Portal Command and Data Layer
-    public class PortalCADInterface()
+    public class PortalCADInterface
     {
-        PortalDeviceContext context;
+        private readonly PortalDeviceContext context;
+
+        public PortalCADInterface(PortalDeviceContext newContext)
+        {
+            context = newContext;
+        }
+
+
         #region OldParts
         //Interface Hookups for User
         #region User
@@ -224,7 +231,7 @@ namespace PortalCommunications
         #endregion
 
         // Interfaces with Portal Group
-        public bool UpdateChangesInDatabase(Device newDeviceObjectWithUpdatedDetails)
+/*        public bool UpdateChangesInDatabase(Device newDeviceObjectWithUpdatedDetails)
         {
 
             Device device = context.devices.Find(newDeviceObjectWithUpdatedDetails.Id);
@@ -235,7 +242,32 @@ namespace PortalCommunications
             device = newDeviceObjectWithUpdatedDetails;
             return true;
 
+        }*/
+        public bool UpdateChangesInDatabase(Device newDeviceObjectWithUpdatedDetails)
+        {
+
+            Device device = context.devices.Find(newDeviceObjectWithUpdatedDetails.Id);
+            if (device == null)
+            {
+                return false;
+            }
+            device.Id = newDeviceObjectWithUpdatedDetails.Id;
+            device.Name = newDeviceObjectWithUpdatedDetails.Name;
+            device.TypeId = newDeviceObjectWithUpdatedDetails.TypeId;
+            device.State = newDeviceObjectWithUpdatedDetails.State;
+            device.RoomId = newDeviceObjectWithUpdatedDetails.RoomId;
+            device.GroupId = newDeviceObjectWithUpdatedDetails.GroupId;
+            device.ParentType = newDeviceObjectWithUpdatedDetails.ParentType;
+            device.Logs = newDeviceObjectWithUpdatedDetails.Logs;
+            device.ParentRoom = newDeviceObjectWithUpdatedDetails.ParentRoom;
+            device.ParentGroup = newDeviceObjectWithUpdatedDetails.ParentGroup;
+            device.LastUpdated = newDeviceObjectWithUpdatedDetails.LastUpdated;
+         
+            context.SaveChanges();
+            return true;
+
         }
+
 
         public Device GetLatestDeviceActivityRecord()
         {
@@ -243,31 +275,57 @@ namespace PortalCommunications
             return device;
         }
 
+        /*        public bool RegisterNewUser(User newUser)
+                {
+                    User user = context.users.Find(newUser.Id);
+                    if (user == null)
+                    {
+                        return false;
+                    }
+                    user = newUser;
+                    context.users.Add(user);
+                    return true;
+                }*/
+
         public bool RegisterNewUser(User newUser)
         {
             User user = context.users.Find(newUser.Id);
             if (user == null)
             {
-                return false;
+                user = newUser;
+                context.users.Add(user);
+                context.SaveChanges();
+                return true;
             }
-            user = newUser;
-            context.users.Add(user);
-            return true;
+            return false;
         }
 
+        /*        public bool RegisterNewDevice(Device newDevice)
+                {
+                    Device device = context.devices.Find(newDevice.Id);
+                    if (device == null)
+                    {
+                        return false;
+                    }
+                    device = newDevice;
+                    context.devices.Add(device);
+                    return true;
+                }*/
         public bool RegisterNewDevice(Device newDevice)
         {
             Device device = context.devices.Find(newDevice.Id);
             if (device == null)
             {
-                return false;
+                device = newDevice;
+                context.devices.Add(device);
+                context.SaveChanges();
+                return true;
+                
             }
-            device = newDevice;
-            context.devices.Add(device);
-            return true;
+            return false;
         }
 
-        public bool DoesUserExists(User user)
+/*        public bool DoesUserExists(User user)
         {
             User usernew = context.users.Find(user.Id);
             if (usernew == null)
@@ -276,6 +334,19 @@ namespace PortalCommunications
             }
             usernew = user;
             context.users.Add(usernew);
+            return true;
+        }
+*/
+        public bool DoesUserExists(User user)
+        {
+            User usernew = context.users.Find(user.Id);
+            if (usernew == null)
+            {
+                return false;
+            }
+/*            usernew = user;
+            context.users.Add(usernew);*/
+
             return true;
         }
 
