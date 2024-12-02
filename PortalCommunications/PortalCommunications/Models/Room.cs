@@ -18,12 +18,12 @@ namespace PortalCommunications.Models
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [Required]
         [ForeignKey("Home")]
         public int HomeId { get; set; }
 
-        public Home ParentHome { get; set; }
+        public Home ParentHome { get; set; } = null!;
         public ICollection<Device> Devices { get; set; } = new List<Device>();
     }
 }
