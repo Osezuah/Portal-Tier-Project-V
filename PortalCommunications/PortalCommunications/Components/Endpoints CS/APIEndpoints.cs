@@ -205,7 +205,7 @@ public class APIEndpoints
 
         ////Create a route that will authenticate user login credentials - Go to line 33 in Login.razor to chaange the formaction link Thomas
         //app.MapPost("/api/user", async ([FromBody] JsonDocument JSobject) =>
-        app.MapPost("/api/user", async (PortalCommunications.Models.User newUser, PortalCADInterface interface_object) =>
+        app.MapPost("/api/user", async (PortalCommunications.Models.User newUser, [FromServices] PortalCADInterface interface_object) =>
         {
 
                     //PortalCommunications.Components.Device_Class.User user = JsonSerializer.Deserialize<PortalCommunications.Components.Device_Class.User>(JSobject.RootElement.GetRawText());
@@ -215,7 +215,7 @@ public class APIEndpoints
                         return Results.BadRequest(new { Message = "Invalid user data." });
                     }
 
-                    if (interface_object.DoesUserExists(newUser)){
+                    if (interface_object.RegisterNewUser(newUser)){ //just changed it to register the user to database
                         //return Results.Ok(new { Id = user.id, Username = user.username, Password = user.password });
                         return Results.Ok(new { Message = "User Authenticated!" });
                     }

@@ -1,6 +1,6 @@
 ﻿@page "/account"
 @inject PortalCommunications.Components.Services.AccountService AccountService
-@using PortalCommunications.Components.Device_Class
+@using PortalCommunications.Models
 @inject NavigationManager NavigationManager
 <!-- this includes api async functions-->
 @inject ServiceAPI ServiceAPI 
@@ -27,7 +27,7 @@
 </div>
 
 <!--Username Display-->
-@if(Login.currentUser == null){
+@if(Login.currentUser.FirstName == null){
     <div class="container text-center">
         <h4 style="font-style:italic; padding-top:50px">Loading ...</h4>
     </div>

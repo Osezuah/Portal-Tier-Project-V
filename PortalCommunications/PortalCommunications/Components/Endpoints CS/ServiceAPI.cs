@@ -21,7 +21,7 @@ public class ServiceAPI
     public async Task<User> LoginTask (int id, string username, string password)
     {
         //create payload - User object
-        var loginPayload = new User {Id = id, FirstName = username, Password = password}; 
+        var loginPayload = new User {Id = id, FirstName = username, LastName = username, Email = password, Password = password}; 
 
         var response = await _httpClient.PostAsJsonAsync("/api/user", loginPayload);
 

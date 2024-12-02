@@ -47,7 +47,8 @@
     public string passwordIdentifier = string.Empty;
     public int id = 0;
     // a public static User variable to store the logged-in user
-    public static User currentUser = null!;
+    public static User currentUser = new User();
+
 
     private async Task HandleLogin()
     {
