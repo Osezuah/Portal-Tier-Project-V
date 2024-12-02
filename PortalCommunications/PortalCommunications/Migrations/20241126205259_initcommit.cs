@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PortalCommunications.Migrations
 {
     /// <inheritdoc />
-    public partial class initcommit : Migration
+    public partial class Initcommit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
