@@ -5,7 +5,7 @@
 @using PortalCommunications.Components.Services
 @inject ServiceAPI ServiceAPI
 @using System.Security.Claims
-@using PortalCommunications.Components.Device_Class
+@using PortalCommunications.Models
 @inject CustomAuthenticationService AuthService
 @inject NavigationManager NavigationManager
 
@@ -47,7 +47,7 @@
     public string passwordIdentifier = string.Empty;
     public int id = 0;
     // a public static User variable to store the logged-in user
-    public static User currentUser;
+    public static User currentUser = null!;
 
     private async Task HandleLogin()
     {
