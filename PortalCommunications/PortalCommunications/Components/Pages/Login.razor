@@ -57,6 +57,7 @@
             //login with username and password
             var user = await ServiceAPI.LoginTask(id, userIdentifier, passwordIdentifier);  
             currentUser = user; //assigns data to currentUser
+
             SignIn();//authentication token
             
         }
@@ -79,9 +80,4 @@
         // Redirect to /all-devices page
         NavigationManager.NavigateTo("/all-devices");
     }
-
-
 }
-
-
-<!--Footnote: Change the way login task gets the data IF Home Team implements register user-->
