@@ -21,7 +21,7 @@ public class ServiceAPI
     public async Task<User> LoginTask (int id, string username, string password)
     {
         //create payload - User object
-        var loginPayload = new User {Id = id, FirstName = username, LastName = username, Email = password, Password = password}; 
+        var loginPayload = new User {Id = id, FirstName = username, Password = password}; 
 
         var response = await _httpClient.PostAsJsonAsync("/api/user", loginPayload);
 
@@ -30,10 +30,6 @@ public class ServiceAPI
             var responseBody = await response.Content.ReadFromJsonAsync<User>();
             if(responseBody != null)
             {
-                //initialise payload with json data parsed
-                loginPayload.Id = responseBody.Id;
-                loginPayload.FirstName = responseBody.FirstName;
-                loginPayload.Password = responseBody.Password;
 
                 return loginPayload;
             } 

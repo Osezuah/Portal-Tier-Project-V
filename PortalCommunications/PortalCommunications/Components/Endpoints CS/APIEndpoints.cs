@@ -244,7 +244,7 @@ public class APIEndpoints
                 // Update the device state and last updated timestamp
                 device.State = newState;
                 device.LastUpdated = DateTime.UtcNow;
-
+                   
                 // Save changes back to the database
                 bool updateSuccess = interface_object.UpdateChangesInDatabase(device);
                 if (!updateSuccess)
