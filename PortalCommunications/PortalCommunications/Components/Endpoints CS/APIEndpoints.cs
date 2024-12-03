@@ -224,24 +224,51 @@ public class APIEndpoints
                     }
 
                 });
-        
+
         ////Create a route that sends changes user makes to device in the ui to home application
-        app.MapPut("/api/device-changes/", async ([FromBody] JsonElement JSobject) =>
+        app.MapPut("/api/device-changes/", async ([FromBody] JsonElement JSobject, PortalCADInterface interface_object) =>
+        {
+            try
+            {
+                // Parse the input JSON
+                var deviceId = JSobject.GetProperty("id").GetInt32();
+                var newState = JSobject.GetProperty("newState").GetString();
+
+                // Use the interface to get the device by ID
+                var device = interface_object.GetDeviceById(deviceId);
+                if (device == null)
                 {
+                    return Results.NotFound(new { Message = $"Device with ID {deviceId} not found in the database!" });
+                }
+
+                // Update the device state and last updated timestamp
+                device.State = newState;
+                device.LastUpdated = DateTime.UtcNow;
+
+                // Save changes back to the database
+                bool updateSuccess = interface_object.UpdateChangesInDatabase(device);
+                if (!updateSuccess)
+                {
+                    return Results.Json(new { Message = "Failed to update the device in the database." }, statusCode: 500);
+                }
+
+                // Return a success message
+                return Results.Ok(new { Message = $"Device {deviceId} state updated to {newState} in the database." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating device: {ex.Message}");
+                return Results.Json(new { Message = "Failed to update the device in the database." }, statusCode: 500);
+            }
+        });
 
 
-                    //This Function will return an object of type "Device" which is intialized with data from latest record of "Device Activity" table. 
-                    //PortalCommunications.Components.Device_Class.Device device = Databases.PortalCADInterface.GetLatestDeviceActivityRecord(id);
 
-                    //JsonDocument JSobjectToSend = JsonSerializer.Serialize(device);
-                    //SendRequestToHome(JSobjectToSend);
 
-                });
-        
         //Create a route that registers devices
         //Expecting a single device within the passed JSON Element.
         //app.MapPost("/api/register-device/", async (JsonDocument payload, PortalCADInterface interface_object) =>
-                app.MapPost("/api/register-device/", async (PortalCommunications.Device newDevice, PortalCADInterface interface_object) =>
+        app.MapPost("/api/register-device/", async (PortalCommunications.Device newDevice, PortalCADInterface interface_object) =>
                 {
 
 
