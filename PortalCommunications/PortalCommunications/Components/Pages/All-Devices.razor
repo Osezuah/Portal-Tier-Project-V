@@ -1,13 +1,15 @@
-﻿@page "/all-devices"
+﻿@using Microsoft.AspNetCore.Http.HttpResults
+@using System.Text.Json
+@using System.Net.Http.Json
+
+@page "/all-devices"
 @inject HttpClient Http
 
 <PageTitle>All Devices</PageTitle>
 
 <div class="container text-center">
     <img src="images/portal logo.png" alt="Portal Logo" style="width: 150px;">
-    <h3 class="display-5">
-        All Devices
-    </h3>
+    <h3 class="display-5">All Devices</h3>
     <small class="text-body-secondary">Manage and monitor all your smart devices here.</small>
 </div>
 
@@ -20,53 +22,144 @@
                     <span class="visually-hidden">Loading...</span>
                 </div>
             }
-            else if (DeviceList?.Any() == true)
-            {
-                <table class="table table-striped table-hover">
-                    <thead class="table-primary">
-                        <tr>
-                            <th>Device(s)</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var device in DeviceList)
-                        {
-                            <tr>
-                                <td>@device.Name</td>
-                                <td>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="device-@device.Id" checked="@(device.State == "On")" @onchange="() => ToggleDeviceStateAsync(device)" />
-                                        <label class="form-check-label" for="device-@device.Id">
-                                            @(device.State)
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            }
             else
             {
-                <div class="alert alert-info text-center" role="alert">
-                    No devices connected.
-                </div>
+                <!-- Devices Without Hubs -->
+                @if (IndependentDevices.Any())
+                {
+                    <div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Device(s)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var device in IndependentDevices)
+                                {
+                                    <tr>
+                                        <td>@device.Name</td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="device-@device.Id"
+                                                       checked="@(device.State.Equals("On", StringComparison.OrdinalIgnoreCase))"
+                                                       @onchange="() => ToggleDeviceAsync(device)" />
+                                                <label class="form-check-label" for="device-@device.Id">
+                                                    @(device.State.Equals("On", StringComparison.OrdinalIgnoreCase) ? "On" : "Off")
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+
+                <!-- Devices With Hubs -->
+                @if (GroupedDevices.Any())
+                {
+                    @foreach (var group in GroupedDevices)
+                    {
+                        <div class="accordion mb-3" id="group-accordion-@group.Key">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading-@group.Key">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@group.Key" aria-expanded="false" aria-controls="collapse-@group.Key">
+                                        @GroupNames[group.Key] (@group.Value.Count devices)
+                                    </button>
+                                </h2>
+                                <div id="collapse-@group.Key" class="accordion-collapse collapse" aria-labelledby="heading-@group.Key" data-bs-parent="#group-accordion-@group.Key">
+                                    <div class="accordion-body">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Device(s)</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var device in group.Value)
+                                                {
+                                                    <tr>
+                                                        <td>@device.Name</td>
+                                                        <td>
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" type="checkbox" id="device-@device.Id"
+                                                                       checked="@(device.State.Equals("On", StringComparison.OrdinalIgnoreCase))"
+                                                                       @onchange="() => ToggleDeviceAsync(device)" />
+                                                                <label class="form-check-label" for="device-@device.Id">
+                                                                    @(device.State.Equals("On", StringComparison.OrdinalIgnoreCase) ? "On" : "Off")
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-info text-center" role="alert">
+                        No devices connected.
+                    </div>
+                }
             }
         </div>
     </div>
 </div>
 
 @code {
-    private List<DeviceModel> DeviceList = new();
-    private bool isLoading = false;
+    private List<Device> DeviceList = new();
+    private List<Device> IndependentDevices = new(); // Devices without hubs
+    private Dictionary<int, List<Device>> GroupedDevices = new(); // Devices grouped by GroupId
+    private bool isLoading = true;
+
+    // Mapping GroupIds to Names
+    private readonly Dictionary<int, string> GroupNames = new()
+    {
+        { 1, "Lock Hub" },
+        { 2, "Sensor Hub" },
+        { 3, "Camera Hub" },
+        { 4, "Alarm Hub" },
+        { 5, "Tracker Hub" }
+    };
 
     protected override async Task OnInitializedAsync()
     {
-        isLoading = true;
+        await LoadDevicesAsync();
+    }
+
+    private async Task LoadDevicesAsync()
+    {
         try
         {
-            await LoadDevicesAsync();
+            isLoading = true;
+
+            // Fetch devices from the API
+            var devices = await Http.GetFromJsonAsync<List<Device>>("/api/devices");
+            if (devices != null)
+            {
+                DeviceList = devices;
+
+                // Separate Independent Devices (GroupId = 0)
+                IndependentDevices = DeviceList.Where(d => d.GroupId == 0).ToList();
+
+                // Group devices with hubs (GroupId > 0)
+                GroupedDevices = DeviceList
+                    .Where(d => d.GroupId > 0)
+                    .GroupBy(d => d.GroupId)
+                    .ToDictionary(g => g.Key, g => g.ToList());
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading devices: {ex.Message}");
         }
         finally
         {
@@ -74,70 +167,54 @@
         }
     }
 
-    // Fetch devices using the actual API
-    private async Task LoadDevicesAsync()
+    private async Task ToggleDeviceAsync(Device device)
     {
         try
         {
-            // Fetch the device IDs dynamically from the API
-            var deviceIds = await Http.GetFromJsonAsync<List<int>>("/api/device-status/");
-            if (deviceIds == null || !deviceIds.Any())
+            // Determine the new state based on the current state
+            var newState = device.State.Equals("On", StringComparison.OrdinalIgnoreCase) ? "Off" : "On";
+
+            // Prepare the payload for the toggle API
+            var payload = new
             {
-                Console.WriteLine("No devices found.");
-                return;
-            }
+                id = device.Id,
+                newState = newState
+            };
 
-            DeviceList.Clear();
+            // Use PutAsJsonAsync to send the payload
+            var response = await Http.PutAsJsonAsync("/api/device-changes/", payload);
 
-            foreach (var id in deviceIds)
-            {
-                var device = await Http.GetFromJsonAsync<DeviceModel>($"/api/device/{id}");
-                if (device != null)
-                {
-                    DeviceList.Add(device);
-                }
-            }
-
-            Console.WriteLine($"Successfully loaded {DeviceList.Count} devices.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error loading devices: {ex.Message}");
-        }
-    }
-
-    // Toggle device state and update using API
-    private async Task ToggleDeviceStateAsync(DeviceModel device)
-    {
-        try
-        {
-            // Toggle the device state
-            device.State = device.State == "On" ? "Off" : "On";
-            device.LastUpdated = DateTime.UtcNow;
-
-            // Send the updated state to the API
-            var response = await Http.PutAsJsonAsync("/api/device-changes/", device);
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine($"Device {device.Name} updated successfully.");
+                // Update the local state of the device
+                device.State = newState;
+                Console.WriteLine($"Device {device.Id} state successfully toggled to {newState}.");
             }
             else
             {
-                Console.WriteLine($"Error updating device {device.Name}: {response.StatusCode}");
+                var error = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"Failed to toggle device {device.Id}. Response: {error}");
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error toggling device state: {ex.Message}");
+            Console.WriteLine($"An error occurred while toggling device {device.Id}: {ex.Message}");
         }
     }
 
-    // Device model
-    public class DeviceModel
+    // Device class to represent the structure of device data
+    public class Device
     {
-        public int Id { get; set; } // Device ID
-        public string Name { get; set; } = string.Empty; // Device Name
-        public string State { get; set; } = "Off"; // Device State (e.g., "On" or "Off")
-        public DateTime LastUpdated { get; set; } // Last updated timestamp
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string State { get; set; } // Use string to match API
+        public int TypeId { get; set; }
+        public int RoomId { get; set; }
+        public int GroupId { get; set; }
+        public string? ParentType { get; set; }
+        public string? Logs { get; set; }
+        public string? ParentRoom { get; set; }
+        public string? ParentGroup { get; set; }
+        public DateTime LastUpdated { get; set; }
     }
 }

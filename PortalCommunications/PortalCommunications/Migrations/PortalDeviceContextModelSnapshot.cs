@@ -51,7 +51,7 @@ namespace PortalCommunications.Migrations
 
                     b.HasIndex("TypeId");
 
-                    b.ToTable("devices");
+                    b.ToTable("devices", (string)null);
                 });
 
             modelBuilder.Entity("PortalCommunications.DeviceLog", b =>
@@ -74,7 +74,7 @@ namespace PortalCommunications.Migrations
 
                     b.HasIndex("DeviceId");
 
-                    b.ToTable("devicelogs");
+                    b.ToTable("devicelogs", (string)null);
                 });
 
             modelBuilder.Entity("PortalCommunications.Models.DeviceGroup", b =>
@@ -89,7 +89,7 @@ namespace PortalCommunications.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("devicegroups");
+                    b.ToTable("devicegroups", (string)null);
                 });
 
             modelBuilder.Entity("PortalCommunications.Models.DeviceType", b =>
@@ -104,7 +104,7 @@ namespace PortalCommunications.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("deviceTypes");
+                    b.ToTable("deviceTypes", (string)null);
                 });
 
             modelBuilder.Entity("PortalCommunications.Models.Home", b =>
@@ -124,7 +124,7 @@ namespace PortalCommunications.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("homes");
+                    b.ToTable("homes", (string)null);
                 });
 
             modelBuilder.Entity("PortalCommunications.Models.Room", b =>
@@ -144,7 +144,7 @@ namespace PortalCommunications.Migrations
 
                     b.HasIndex("HomeId");
 
-                    b.ToTable("rooms");
+                    b.ToTable("rooms", (string)null);
                 });
 
             modelBuilder.Entity("PortalCommunications.Models.User", b =>
@@ -168,7 +168,7 @@ namespace PortalCommunications.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("users");
+                    b.ToTable("users", (string)null);
                 });
 
             modelBuilder.Entity("PortalCommunications.Device", b =>

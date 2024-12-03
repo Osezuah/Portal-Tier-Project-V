@@ -12,7 +12,7 @@ namespace PortalCommunications.Migrations
 {
     [DbContext(typeof(PortalDeviceContext))]
     [Migration("20241126205259_initcommit")]
-    partial class initcommit
+    partial class Initcommit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

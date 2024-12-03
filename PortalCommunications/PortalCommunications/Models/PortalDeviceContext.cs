@@ -55,6 +55,7 @@ namespace PortalCommunications.Models
                 .WithOne(Device => Device.ParentType)
                 .HasForeignKey("TypeId")
                 .IsRequired(false);
+
         }
     }
 }

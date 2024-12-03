@@ -49,6 +49,9 @@ namespace PortalCommunications
 
             // Register AccountService as a scoped service
             builder.Services.AddScoped<AccountService>();
+            //changes-
+            builder.Services.AddScoped<PortalCADInterface>();
+            builder.Services.AddScoped<APIEndpoints>();
 
             var app = builder.Build();
 

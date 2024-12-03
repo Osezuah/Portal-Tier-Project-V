@@ -17,11 +17,11 @@ namespace PortalCommunications
         public int DeviceId { get; set; } // FK
 
         [Required]
-        public string LoggedState { get; set; }
+        public string LoggedState { get; set; } = string.Empty;
 
         [Required]
         public DateTime LoggedTime { get; set; } // time of when log was created
 
-        public Device Device { get; set; } // navigation property
+        public Device Device { get; set; } = null!;// navigation property
     }
 }
