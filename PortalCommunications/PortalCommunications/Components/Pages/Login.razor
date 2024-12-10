@@ -1,0 +1,87 @@
+﻿@page "/"
+@using PortalCommunications.Components.Layout
+@layout EmptyLayout
+@using Microsoft.AspNetCore.Components.Authorization
+@using PortalCommunications.Components.Services
+@inject ServiceAPI ServiceAPI
+@using System.Security.Claims
+@using PortalCommunications.Models
+@inject CustomAuthenticationService AuthService
+@inject NavigationManager NavigationManager
+
+
+
+<div class="container">
+    <div class="row justify-content-center align-items-center vh-100">
+        <div class="col-12 col-md-6 col-lg-4">
+            <!-- Card Wrapper -->
+            <div class="card shadow p-4 rounded">
+                <div class="card-body text-center">
+                    <!-- Responsive Image -->
+                    <img src="../images/portal logo.png" alt="Portal Logo" class="img-fluid mb-3" style="max-width: 150px;">
+                    <!-- Responsive Title -->
+                    <h3 class="fw-bold mb-4">Welcome to Portal</h3>
+
+                    <!-- Login Form -->
+                    <form @onsubmit="HandleLogin">
+                        <div class="mb-3">
+                            <input @bind="userIdentifier" tabindex="userIdentifier" type="text" class="form-control" id="usernameInput" required placeholder="Enter Username">
+                        </div>
+                        <div class="mb-3">
+                            <input @bind="passwordIdentifier" tabindex="passwordIdentifier" type="password" class="form-control" id="passwordInput" required placeholder="Enter Password">
+                        </div>
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+    public string userIdentifier = string.Empty;
+    public string passwordIdentifier = string.Empty;
+    public int id = 0;
+    // a public static User variable to store the logged-in user
+    public static User currentUser = new User();
+
+
+    private async Task HandleLogin()
+    {
+        try
+        {
+            //login with username and password
+            var user = await ServiceAPI.LoginTask(id, userIdentifier, passwordIdentifier);  
+            currentUser = user; //assigns data to currentUser
+            SignIn();//authentication token
+            
+        }
+        catch (Exception ex)
+        {
+            // If an error occurs (e.g., invalid credentials), show an error message
+            string errorMessage = "Login failed: " + ex.Message;
+        }
+    }
+    private void SignIn()
+    {
+        var identity = new ClaimsIdentity(new[]
+        {
+            new Claim(ClaimTypes.Name, userIdentifier),
+        }, "Custom Authentication");
+
+        var newUser = new ClaimsPrincipal(identity);
+        AuthService.CurrentUser = newUser;
+
+        // Redirect to /all-devices page
+        NavigationManager.NavigateTo("/all-devices");
+    }
+
+
+}
+
+
+<!--Footnote: Change the way login task gets the data IF Home Team implements register user-->
